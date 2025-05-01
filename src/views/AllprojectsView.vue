@@ -91,20 +91,19 @@ const openDialog = (project: any) => {
     <!-- ✅ Project List -->
     <v-main class="bg-black py-12">
       <v-container class="fade-in">
-        <h2 class="text-center text-white mb-10 display-1 font-weight-bold">My Projects</h2>
+        <h2 class="header-project-title">My Projects</h2>
 
-        <v-row dense>
+        <v-row dense class="project-grid" justify="center">
           <v-col
             v-for="(project, index) in projects"
             :key="index"
             cols="12"
-            sm="6"
             md="4"
             @click="openDialog(project)"
           >
-            <v-card class="hover-card" color="#1e1e1e" dark elevation="6">
+            <v-card class="project-card" dark>
               <v-img :src="project.cover" height="200px" cover></v-img>
-              <v-card-title>{{ project.title }}</v-card-title>
+              <div class="project-title">{{ project.title }}</div>
             </v-card>
           </v-col>
         </v-row>
@@ -146,16 +145,54 @@ const openDialog = (project: any) => {
   }
 }
 
-.hover-card {
-  cursor: pointer;
-  transition: 0.3s;
-}
-.hover-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+.project-grid {
+  row-gap: 32px;
+  column-gap: 24px;
 }
 
-.v-card-text {
+.project-card {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.4s ease;
+  box-shadow:
+    0 0 8px rgba(0, 255, 255, 0.2),
+    0 0 16px rgba(160, 32, 240, 0.1);
+}
+
+.project-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 0 10px #00f0ff,
+    0 0 20px #a020f0,
+    0 0 30px rgba(160, 32, 240, 0.4);
+}
+
+.project-title {
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  color: white;
+  padding: 12px;
+  background-color: #1e1e1e;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.header-project-title {
+  font-size: 42px;
+  font-weight: 800;
+  text-align: center;
+  color: transparent;
+  background-image: linear-gradient(to right, #00fff7, #a020f0);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1.5px;
+  margin-bottom: 40px;
+  text-shadow:
+    0 0 10px rgba(0, 255, 255, 0.2),
+    0 0 20px rgba(160, 32, 240, 0.3);
+}
+
+.v-dialog .v-card-text {
   color: #ccc;
 }
 </style>

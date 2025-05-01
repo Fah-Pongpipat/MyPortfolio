@@ -52,7 +52,7 @@ const skills = [
 
     <v-main class="bg-black fade-in">
       <v-container class="pa-12 text-white">
-        <h2 class="text-center mb-12 education-title">🎓 ประวัติการศึกษา</h2>
+        <h2 class="header-project-title">ประวัติการศึกษา</h2>
 
         <v-carousel
           hide-delimiter-background
@@ -95,22 +95,90 @@ const skills = [
         </v-row>
       </v-container>
 
-      <v-container class="my-12 goal-section fade-in">
-        <v-icon size="40" color="cyan" class="mb-2">mdi-target</v-icon>
-        <h2 class="font-weight-bold mb-4">เป้าหมายของฉัน</h2>
-        <p class="career-goal">
-          ผมมีความมุ่งมั่นที่จะทำงานในตำแหน่ง Backend Developer หรือ Frontend Developer
-          เพราะผมสนใจทั้งด้านการพัฒนาโครงสร้างระบบและการออกแบบประสบการณ์ผู้ใช้ โดยเฉพาะในส่วนของ
-          Backend ผมมีความสนใจในกระบวนการเขียนโปรแกรมที่เกี่ยวข้องกับการออกแบบ API,
-          การเชื่อมต่อกับฐานข้อมูล และการสร้างระบบที่มีประสิทธิภาพและปลอดภัย
-          ผมเชื่อว่าความเข้าใจในทั้งสองฝั่งจะช่วยให้ผมสามารถพัฒนาระบบที่ตอบโจทย์ผู้ใช้งานได้อย่างรอบด้าน
-        </p>
+      <v-container class="my-12 goal-section fancy-goal-container fade-in">
+        <div class="goal-header d-flex align-center mb-4">
+          <v-icon size="36" color="cyan" class="mr-2 glow-icon">mdi-target</v-icon>
+          <h2 class="goal-title">เป้าหมายของฉัน</h2>
+        </div>
+
+        <v-card class="goal-card" flat>
+          <v-card-text class="goal-text">
+            ผมมีความมุ่งมั่นที่จะทำงานในตำแหน่ง <strong>Backend Developer</strong> หรือ
+            <strong>Frontend Developer</strong><br />
+            เพราะผมสนใจทั้งด้านการพัฒนาโครงสร้างระบบและการออกแบบประสบการณ์ผู้ใช้ โดยเฉพาะในส่วนของ
+            <strong>Backend</strong> ผมมีความสนใจในกระบวนการเขียนโปรแกรมที่เกี่ยวข้องกับการออกแบบ
+            API, การเชื่อมต่อกับฐานข้อมูล และการสร้างระบบที่มีประสิทธิภาพและปลอดภัย<br />
+            ผมเชื่อว่าความเข้าใจในทั้งสองฝั่งจะช่วยให้ผมสามารถพัฒนาระบบที่ตอบโจทย์ผู้ใช้งานได้อย่างรอบด้าน
+          </v-card-text>
+        </v-card>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <style scoped>
+.header-project-title {
+  font-size: 42px;
+  font-weight: 800;
+  text-align: center;
+  color: transparent;
+  background-image: linear-gradient(to right, #a86af0, #4fc3f7, #6ffff8); /* purple to sky cyan */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1.5px;
+  margin-bottom: 40px;
+  text-shadow:
+    0 0 6px rgba(111, 255, 248, 0.2),
+    0 0 18px rgba(178, 106, 255, 0.35);
+}
+
+.fancy-goal-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.goal-header {
+  justify-content: center;
+}
+
+.goal-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.goal-card {
+  background-color: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.goal-card:hover {
+  box-shadow: 0 6px 24px rgba(0, 255, 255, 0.12);
+}
+.goal-text {
+  font-size: 18px;
+  line-height: 1.9;
+  color: #e0e0e0;
+  text-align: justify;
+  font-family: 'Sarabun', 'Prompt', sans-serif;
+}
+
+.goal-text strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.glow-icon {
+  text-shadow:
+    0 0 8px #00fff0,
+    0 0 12px #a020f0;
+}
+
 /* Card container ของแต่ละหมวดทักษะ */
 .skill-card {
   border-radius: 20px;
@@ -159,31 +227,19 @@ const skills = [
     0 0 15px rgba(0, 255, 255, 0.6);
 }
 
-.custom-carousel .v-carousel__prev,
-.custom-carousel .v-carousel__next {
-  background: linear-gradient(135deg, #00f0ff, #a020f0);
-  color: white;
+/* ปรับปุ่มเลื่อนให้ดูสุภาพ */
+.custom-carousel ::v-deep(.v-carousel__prev),
+.custom-carousel ::v-deep(.v-carousel__next) {
+  background-color: rgba(200, 200, 200, 0.2);
+  color: #ffffff;
   border-radius: 50%;
-  box-shadow:
-    0 0 10px #00f0ff,
-    0 0 20px #a020f0,
-    0 0 30px rgba(160, 32, 240, 0.5);
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  opacity: 0.95;
+  width: 44px;
+  height: 44px;
+  transition: background-color 0.3s ease;
 }
-
-.custom-carousel .v-carousel__prev:hover,
-.custom-carousel .v-carousel__next:hover {
-  transform: scale(1.1);
-  box-shadow:
-    0 0 16px #00f0ff,
-    0 0 32px #a020f0,
-    0 0 48px rgba(160, 32, 240, 0.6);
+.custom-carousel ::v-deep(.v-carousel__prev:hover),
+.custom-carousel ::v-deep(.v-carousel__next:hover) {
+  background-color: rgba(100, 100, 100, 0.3);
 }
 
 .fade-in {
@@ -201,23 +257,20 @@ const skills = [
 }
 
 .education-title {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: 700;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 1px;
   text-align: center;
+  color: #e6e6e6;
+  font-family: 'Sarabun', 'Prompt', sans-serif;
   margin-bottom: 32px;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .neon-avatar {
-  border: 4px solid #00ffff;
-  box-shadow:
-    0 0 12px #00ffff,
-    0 0 24px #00ffff,
-    0 0 36px rgba(0, 255, 255, 0.5);
-  transition: 0.3s ease;
+  border: 3px solid #4a90e2;
+  box-shadow: none;
+  background-color: #f0f0f0;
+  padding: 4px;
 }
 .v-avatar img {
   object-fit: cover;
@@ -269,8 +322,21 @@ body,
   height: 100%;
 }
 
-.education-slide {
-  padding-bottom: 60px;
+.education-slide p,
+.education-slide h3 {
+  color: #e0e0e0;
+  font-family: 'Sarabun', sans-serif;
+}
+
+.education-slide h3 {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.education-slide p {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: #cccccc;
 }
 .education-carousel .v-carousel__controls {
   margin-top: 80px;
