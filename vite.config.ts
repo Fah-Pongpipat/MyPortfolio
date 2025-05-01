@@ -6,6 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/MyPortfolio/', // <-- ต้องตรงกับชื่อ repo บน GitHub
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
