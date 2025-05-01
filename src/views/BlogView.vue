@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MenuViewVue from './MenuView.vue'
+</script>
+
 <template>
-  <div><h1>Blog</h1></div>
+  <v-app>
+    <v-app-bar app color="black" dark flat>
+      <MenuViewVue></MenuViewVue>
+    </v-app-bar>
+  </v-app>
 </template>
+
+<style scoped></style>

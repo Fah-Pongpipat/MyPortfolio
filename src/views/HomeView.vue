@@ -4,38 +4,39 @@
   <v-container
     class="fill-height d-flex flex-column justify-center align-center text-center intro-section"
   >
-    <!-- ครอบทั้งหมดด้วย slide down wrapper -->
     <div class="slide-down-wrapper">
-      <!-- รูปภาพพร้อมแสงพื้นหลัง -->
+      <!-- รูปภาพ -->
       <div class="avatar-wrapper">
         <v-avatar size="480" class="mb-4">
           <img src="@/images/Cool-Fah.jpg" alt="My Profile Picture" />
         </v-avatar>
       </div>
 
-      <!-- คำกล่าวทักทาย -->
+      <!-- ข้อความทักทาย -->
       <div class="intro-text">
-        <h1 class="text-h4 font-weight-bold mb-2">สวัสดีครับ ผมชื่อ Fah 555</h1>
-        <p class="text-subtitle-1 mb-4">Welcome to My Portfolio</p>
+        <h1 class="intro-title mb-2">สวัสดีครับ ผมชื่อ Pongpipat Siangsai</h1>
+        <p class="intro-desc mb-6">
+          ยินดีต้อนรับเข้าสู่เว็บไซต์ผลงานของผม<br />
+          ที่นี่คุณจะได้พบกับประสบการณ์ การเรียนรู้ และโปรเจกต์ที่ผมได้ลงมือพัฒนาด้วยความตั้งใจ
+        </p>
       </div>
 
-      <!-- ปุ่มไปหน้าถัดไป -->
-      <v-btn class="glow-button" color="primary" large @click="$router.push('/about-me')">
-        ดูเพิ่มเติม
-      </v-btn>
+      <!-- ปุ่มต่อ -->
+      <v-btn class="fancy-button" @click="$router.push('/about-me')">ดูเพิ่มเติม</v-btn>
     </div>
   </v-container>
 </template>
 
 <style scoped>
-/* พื้นหลังดำทั้งหน้า */
+/* ฟอนต์ & พื้นหลัง */
 .intro-section {
   background-color: #000;
   color: white;
+  font-family: 'Prompt', sans-serif;
   overflow: hidden;
 }
 
-/* แอนิเมชัน slide-down */
+/* สไลด์ลง */
 .slide-down-wrapper {
   animation: slideDown 1s ease-out;
 }
@@ -51,7 +52,48 @@
   }
 }
 
-/* เอฟเฟกต์แสงอวกาศหลังรูป */
+/* หัวข้อ */
+.intro-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(160, 32, 240, 0.3);
+}
+
+/* คำอธิบาย */
+.intro-desc {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #dddddd;
+}
+
+/* ปุ่มเรืองแสง */
+.fancy-button {
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  background: linear-gradient(135deg, #00f0ff, #a020f0);
+  border-radius: 28px;
+  text-transform: none;
+  box-shadow:
+    0 0 10px #00f0ff,
+    0 0 20px #a020f0;
+  transition: all 0.3s ease-in-out;
+}
+
+.fancy-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 15px #00f0ff,
+    0 0 30px #a020f0,
+    0 0 40px rgba(160, 32, 240, 0.5);
+}
+
+/* เอฟเฟกต์แสงหลัง avatar */
 .avatar-wrapper {
   position: relative;
   display: inline-block;
@@ -82,25 +124,5 @@
   box-shadow:
     0 0 25px rgba(255, 102, 255, 0.4),
     0 0 45px rgba(136, 84, 208, 0.3);
-}
-
-/* ปุ่มแบบมีแสงและมิติ */
-.glow-button {
-  position: relative;
-  z-index: 1;
-  box-shadow:
-    0 4px 15px rgba(0, 0, 0, 0.2),
-    0 0 15px rgba(255, 105, 180, 0.5),
-    0 0 25px rgba(255, 105, 180, 0.4);
-  transition: all 0.3s ease;
-  border-radius: 12px;
-}
-
-.glow-button:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.3),
-    0 0 25px rgba(255, 105, 180, 0.7),
-    0 0 35px rgba(255, 105, 180, 0.6);
 }
 </style>

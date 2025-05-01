@@ -15,7 +15,7 @@ const educationList = [
     title: 'บดินทรเดชา (สิงห์ สิงหเสนี) สมุทรปราการ',
     degree: 'มัธยมศึกษาตอนปลาย',
     major: 'ศิลป์คํานวณ',
-    year: '2017–2020',
+    year: '2018–2021',
     gpa: '2.82',
     image: bdsLogo,
   },
@@ -38,7 +38,7 @@ const skills = [
     items: ['Figma', 'Canva'],
   },
   {
-    title: '🗄️ ฐานข้อมูล (Databases)', // ✅ แก้ชื่อให้ชัดเจน + เพิ่มไอคอน
+    title: '🗄️ ฐานข้อมูล (Databases)',
     items: ['MySQL', 'SQLite', 'Mongodb'],
   },
 ]
@@ -46,60 +46,47 @@ const skills = [
 
 <template>
   <v-app>
-    <!-- Bar Menu -->
     <v-app-bar app color="black" dark flat>
       <MenuViewVue></MenuViewVue>
     </v-app-bar>
 
-    <!-- Carousel Section -->
     <v-main class="bg-black fade-in">
       <v-container class="pa-12 text-white">
-        <h2 class="text-center mb-8 display-1 font-weight-bold">ประวัติการศึกษา</h2>
+        <h2 class="text-center mb-12 education-title">🎓 ประวัติการศึกษา</h2>
 
         <v-carousel
           hide-delimiter-background
           height="480"
           cycle
           show-arrows
-          class="education-carousel"
+          class="education-carousel custom-carousel"
+          :prev-icon="'mdi-chevron-left'"
+          :next-icon="'mdi-chevron-right'"
         >
           <v-carousel-item v-for="(item, index) in educationList" :key="index">
             <div class="education-slide d-flex flex-column align-center justify-center text-center">
-              <v-avatar size="200" class="mb-6 mt-8 neon-avatar" style="border: 4px solid white">
+              <v-avatar size="200" class="mb-6 mt-8 neon-avatar">
                 <img :src="item.image" alt="education image" />
               </v-avatar>
-              <h3 class="text-h5 font-weight-bold">{{ item.degree }}</h3>
-              <p class="text-subtitle-1">{{ item.title }}</p>
-              <p v-if="item.major">📘 {{ item.major }}</p>
-              <p>🗕️ {{ item.year }}</p>
+              <h3 class="text-h5 font-weight-bold mb-1">{{ item.degree }}</h3>
+              <p class="text-subtitle-1 mb-1">{{ item.title }}</p>
+              <p v-if="item.major" class="mb-1">📘 {{ item.major }}</p>
+              <p class="mb-1">📅 {{ item.year }}</p>
               <p>📊 GPA: {{ item.gpa }}</p>
             </div>
           </v-carousel-item>
         </v-carousel>
       </v-container>
-      <!-- Skills -->
+
       <v-container class="my-12 fade-in">
         <h2 class="text-center font-weight-bold mb-8">ทักษะที่เชี่ยวชาญ</h2>
 
         <v-row dense>
-          <v-col
-            class="blackground-v-card"
-            cols="12"
-            md="6"
-            lg="4"
-            v-for="(category, index) in skills"
-            :key="index"
-          >
-            <v-card class="pa-4 h-100 glow-background" color="#1e1e1e" dark elevation="4">
-              <h3 class="text-h6 mb-4">{{ category.title }}</h3>
+          <v-col cols="12" md="6" lg="4" v-for="(category, index) in skills" :key="index">
+            <v-card class="skill-card h-100" dark elevation="4">
+              <h3>{{ category.title }}</h3>
               <div class="d-flex flex-wrap gap-2">
-                <v-chip
-                  v-for="(skill, i) in category.items"
-                  :key="i"
-                  color="cyan"
-                  text-color="black"
-                  class="ma-1"
-                >
+                <v-chip v-for="(skill, i) in category.items" :key="i" class="skill-chip ma-1">
                   {{ skill }}
                 </v-chip>
               </div>
@@ -107,7 +94,7 @@ const skills = [
           </v-col>
         </v-row>
       </v-container>
-      <!-- Goals -->
+
       <v-container class="my-12 goal-section fade-in">
         <v-icon size="40" color="cyan" class="mb-2">mdi-target</v-icon>
         <h2 class="font-weight-bold mb-4">เป้าหมายของฉัน</h2>
@@ -124,10 +111,84 @@ const skills = [
 </template>
 
 <style scoped>
+/* Card container ของแต่ละหมวดทักษะ */
+.skill-card {
+  border-radius: 20px;
+  padding: 24px;
+  background: linear-gradient(145deg, #1c1c1c, #121212);
+  box-shadow:
+    0 0 10px #00ffc3,
+    0 0 20px #00cfff,
+    0 0 30px rgba(0, 255, 213, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 0 15px #00ffc3,
+    0 0 25px #00cfff,
+    0 0 40px rgba(0, 255, 213, 0.6);
+}
+
+/* หัวข้อของแต่ละหมวด */
+.skill-card h3 {
+  color: #00fff0;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+/* ปรับปุ่ม chip */
+.skill-chip {
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: #00ffff;
+  color: #000 !important;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+}
+
+.skill-chip:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 10px #00ffff,
+    0 0 15px rgba(0, 255, 255, 0.6);
+}
+
+.custom-carousel .v-carousel__prev,
+.custom-carousel .v-carousel__next {
+  background: linear-gradient(135deg, #00f0ff, #a020f0);
+  color: white;
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px #00f0ff,
+    0 0 20px #a020f0,
+    0 0 30px rgba(160, 32, 240, 0.5);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0.95;
+}
+
+.custom-carousel .v-carousel__prev:hover,
+.custom-carousel .v-carousel__next:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 16px #00f0ff,
+    0 0 32px #a020f0,
+    0 0 48px rgba(160, 32, 240, 0.6);
+}
+
 .fade-in {
   animation: fadeIn 1.2s ease-out;
 }
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -139,6 +200,35 @@ const skills = [
   }
 }
 
+.education-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 32px;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+}
+
+.neon-avatar {
+  border: 4px solid #00ffff;
+  box-shadow:
+    0 0 12px #00ffff,
+    0 0 24px #00ffff,
+    0 0 36px rgba(0, 255, 255, 0.5);
+  transition: 0.3s ease;
+}
+.v-avatar img {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.goal-section {
+  background-color: #121212;
+  border-radius: 16px;
+  padding: 40px;
+}
 .career-goal {
   font-size: 20px;
   line-height: 1.8;
@@ -149,10 +239,13 @@ const skills = [
   margin: 0 auto;
 }
 
-.goal-section {
-  background-color: #121212;
-  border-radius: 16px;
-  padding: 40px;
+.blackground-v-card {
+  border: 2px solid #99f3bc;
+  box-shadow:
+    0 0 12px #6febd6,
+    0 0 22px #1dd417,
+    0 0 36px rgba(158, 247, 155, 0.5);
+  transition: 0.3s ease;
 }
 
 .glow-background::before {
@@ -168,24 +261,6 @@ const skills = [
   z-index: -1;
 }
 
-.neon-avatar {
-  border: 4px solid #00ffff;
-  box-shadow:
-    0 0 12px #00ffff,
-    0 0 24px #00ffff,
-    0 0 36px rgba(0, 255, 255, 0.5);
-  transition: 0.3s ease;
-}
-
-.blackground-v-card {
-  border: 2px solid #99f3bc;
-  box-shadow:
-    0 0 12px #6febd6,
-    0 0 22px #1dd417,
-    0 0 36px rgba(158, 247, 155, 0.5);
-  transition: 0.3s ease;
-}
-
 html,
 body,
 #app {
@@ -194,18 +269,12 @@ body,
   height: 100%;
 }
 
+.education-slide {
+  padding-bottom: 60px;
+}
 .education-carousel .v-carousel__controls {
   margin-top: 80px;
   position: relative;
   z-index: 1;
-}
-
-.education-slide {
-  padding-bottom: 60px;
-}
-
-.v-avatar img {
-  object-fit: cover;
-  border-radius: 50%;
 }
 </style>
