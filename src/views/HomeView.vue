@@ -20,7 +20,7 @@
       </div>
 
       <!-- ปุ่มไปหน้าถัดไป -->
-      <v-btn class="glow-button" color="primary" large @click="$router.push('/menu')">
+      <v-btn class="glow-button" color="primary" large @click="$router.push('/about-me')">
         ดูเพิ่มเติม
       </v-btn>
     </div>
