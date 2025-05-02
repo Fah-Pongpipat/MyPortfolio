@@ -28,19 +28,23 @@
 </template>
 
 <style scoped>
-/* ฟอนต์ & พื้นหลัง */
+/* พื้นหลัง + ฟอนต์ */
 .intro-section {
   background-color: #000;
   color: white;
   font-family: 'Prompt', sans-serif;
-  overflow: hidden;
-  padding: 32px 16px;
+  padding: 24px 16px;
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* สไลด์ลง */
+/* สไลด์เข้า */
 .slide-down-wrapper {
   animation: slideDown 1s ease-out;
+  max-width: 100%;
 }
 
 @keyframes slideDown {
@@ -58,7 +62,7 @@
 .intro-title {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 34px;
   color: #ffffff;
   text-shadow: 0 0 10px rgba(160, 32, 240, 0.3);
   margin-bottom: 16px;
@@ -70,11 +74,11 @@
   font-weight: 300;
   line-height: 1.8;
   color: #dddddd;
-  max-width: 800px;
+  max-width: 90%;
   margin: 0 auto 32px;
 }
 
-/* ปุ่มเรืองแสง */
+/* ปุ่ม */
 .fancy-button {
   padding: 12px 28px;
   font-size: 16px;
@@ -98,10 +102,13 @@
     0 0 40px rgba(160, 32, 240, 0.5);
 }
 
-/* เอฟเฟกต์แสงหลัง avatar */
+/* Avatar glow */
 .avatar-wrapper {
   position: relative;
   display: inline-block;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
 }
 
 .avatar-wrapper::before {
@@ -109,8 +116,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 460px;
-  height: 460px;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(
     circle,
     rgba(255, 102, 255, 0.4),
@@ -120,53 +127,34 @@
   transform: translate(-50%, -50%);
   border-radius: 50%;
   z-index: 0;
-  filter: blur(2px);
+  filter: blur(3px);
 }
 
 .v-avatar {
   position: relative;
   z-index: 1;
-  width: 460px;
-  height: 460px;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  max-width: 460px;
   box-shadow:
     0 0 25px rgba(255, 102, 255, 0.4),
     0 0 45px rgba(136, 84, 208, 0.3);
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-  .intro-title {
-    font-size: 30px;
-  }
-  .intro-desc {
-    font-size: 16px;
-  }
-  .v-avatar {
-    width: 360px;
-    height: 360px;
-  }
-  .avatar-wrapper::before {
-    width: 360px;
-    height: 360px;
-  }
-}
-
 @media (max-width: 768px) {
   .intro-title {
     font-size: 26px;
   }
+
   .intro-desc {
     font-size: 15px;
   }
-  .v-avatar {
-    width: 280px;
-    height: 280px;
-  }
-  .avatar-wrapper::before {
-    width: 280px;
-    height: 280px;
+
+  .fancy-button {
+    font-size: 15px;
+    padding: 10px 24px;
   }
 }
 
@@ -174,16 +162,15 @@
   .intro-title {
     font-size: 22px;
   }
+
   .intro-desc {
     font-size: 14px;
+    line-height: 1.6;
   }
-  .v-avatar {
-    width: 220px;
-    height: 220px;
-  }
-  .avatar-wrapper::before {
-    width: 220px;
-    height: 220px;
+
+  .fancy-button {
+    font-size: 14px;
+    padding: 10px 20px;
   }
 }
 </style>
