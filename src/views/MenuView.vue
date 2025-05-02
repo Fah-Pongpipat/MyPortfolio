@@ -34,77 +34,70 @@
 <style scoped>
 .navbar {
   box-shadow: 0 2px 10px rgba(255, 0, 255, 0.2);
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 16px;
 }
 
-/* ปุ่มเมนู */
 .menu-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .menu-wrapper .v-btn {
   font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: 0.2s ease;
   color: white;
   font-size: 16px;
-  padding: 6px 10px;
-  text-transform: none;
-  white-space: nowrap; /* ป้องกันตัดบรรทัดในปุ่ม */
+  white-space: nowrap;
+  padding: 6px 12px;
 }
 
 .menu-wrapper .v-btn:hover {
   color: #ff66cc;
 }
 
-.menu-wrapper .v-icon {
-  font-size: 18px;
-  margin-right: 6px;
+.v-toolbar-title {
+  font-size: 20px;
+  white-space: nowrap;
+  padding-right: 16px;
 }
 
-/* Desktop ใหญ่ */
-@media (min-width: 1200px) {
-  .menu-wrapper .v-btn {
-    font-size: 18px;
-    padding: 10px 16px;
-  }
-}
-
-/* Tablet */
-@media (max-width: 960px) {
-  .v-toolbar-title {
-    font-size: 20px;
-  }
-
-  .menu-wrapper {
-    justify-content: center;
-    gap: 6px;
-  }
-
-  .menu-wrapper .v-btn {
-    font-size: 15px;
-    padding: 6px 8px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .v-toolbar-title {
     font-size: 18px;
   }
 
-  .menu-wrapper {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px;
+  .menu-wrapper .v-btn {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .v-toolbar-title {
+    font-size: 16px;
   }
 
   .menu-wrapper .v-btn {
     font-size: 13px;
-    padding: 4px 6px;
+    padding: 3px 6px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .v-toolbar-title {
+    font-size: 24px;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 18px;
+    padding: 8px 16px;
   }
 }
 </style>
