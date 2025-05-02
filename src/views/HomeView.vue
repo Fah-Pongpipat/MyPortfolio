@@ -7,7 +7,7 @@
     <div class="slide-down-wrapper">
       <!-- รูปภาพ -->
       <div class="avatar-wrapper">
-        <v-avatar size="480" class="mb-4">
+        <v-avatar size="400" class="mb-4">
           <img src="@/images/Cool-Fah.jpg" alt="My Profile Picture" />
         </v-avatar>
       </div>
