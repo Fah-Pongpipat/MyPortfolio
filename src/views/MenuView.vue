@@ -3,11 +3,11 @@
 <template>
   <v-app>
     <v-app-bar app color="black" dark flat class="navbar">
-      <v-container class="d-flex align-center justify-space-between flex-wrap pa-0">
+      <v-container class="menu-container">
         <!-- Logo -->
         <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
-        <!-- เมนูแนวนอน -->
+        <!-- เมนู -->
         <div class="menu-wrapper">
           <v-btn text @click="$router.push('/about-me')">
             <v-icon left>mdi-account</v-icon> ABOUT ME
@@ -34,28 +34,40 @@
 <style scoped>
 .navbar {
   box-shadow: 0 2px 10px rgba(255, 0, 255, 0.2);
-  padding: 0 12px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-/* Wrapper สำหรับเมนู */
+/* ✅ ตัวห่อเมนูทั้งหมด + logo */
+.menu-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ✅ เมนูยืดได้และห่อ */
 .menu-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
+  flex: 1 1 auto;
   max-width: 100%;
 }
 
 /* ปุ่มเมนู */
 .menu-wrapper .v-btn {
   font-weight: bold;
-  font-size: 16px;
   color: white;
+  font-size: 15px;
   padding: 6px 10px;
   text-transform: none;
   white-space: nowrap;
-  flex: 1 0 auto;
+  transition: 0.3s;
 }
 
 .menu-wrapper .v-btn:hover {
@@ -67,58 +79,15 @@
   margin-right: 6px;
 }
 
-/* === Responsive === */
-
-/* Desktop ใหญ่ */
-@media (min-width: 1200px) {
-  .v-toolbar-title {
-    font-size: 24px;
-  }
-
-  .menu-wrapper {
-    justify-content: flex-end;
-  }
-
-  .menu-wrapper .v-btn {
-    font-size: 18px;
-    padding: 8px 16px;
-  }
-}
-
-/* Tablet */
-@media (max-width: 960px) {
-  .v-toolbar-title {
-    font-size: 20px;
-  }
-
-  .menu-wrapper {
-    justify-content: center;
-  }
-
-  .menu-wrapper .v-btn {
-    font-size: 15px;
-    padding: 6px 8px;
-  }
-}
-
-/* Mobile */
+/* Title responsive */
 @media (max-width: 600px) {
   .v-toolbar-title {
-    font-size: 18px;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  .menu-wrapper {
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: wrap;
+    font-size: 16px;
   }
 
   .menu-wrapper .v-btn {
     font-size: 13px;
-    padding: 5px 6px;
+    padding: 4px 8px;
   }
 }
 </style>
