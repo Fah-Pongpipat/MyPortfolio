@@ -1,56 +1,29 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-const drawer = ref(false)
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <v-app>
-    <v-app-bar app color="black" dark flat>
-      <!-- ปุ่มเมนูแสดงเฉพาะมือถือ -->
-      <v-app-bar-nav-icon class="d-sm-none" @click="drawer = !drawer" />
+    <v-app-bar app color="black" dark flat class="navbar">
+      <v-container class="d-flex align-center justify-space-between pa-0">
+        <!-- Logo / Title -->
+        <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
-      <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
-
-      <v-spacer class="d-none d-sm-flex" />
-
-      <!-- เมนูสำหรับหน้าจอใหญ่ -->
-      <div class="d-none d-sm-flex">
-        <v-btn text @click="$router.push('/about-me')">
-          <v-icon left class="mr-2">mdi-account</v-icon>
-          About Me
-        </v-btn>
-        <v-btn text @click="$router.push('/all-project')">
-          <v-icon left class="mr-2">mdi-briefcase-variant</v-icon>
-          Projects
-        </v-btn>
-        <v-btn text @click="$router.push('/certificates')">
-          <v-icon left class="mr-2">mdi-certificate</v-icon>
-          Certificates
-        </v-btn>
-        <v-btn text @click="$router.push('/contact')">
-          <v-icon left class="mr-2">mdi-email</v-icon>
-          Contact
-        </v-btn>
-      </div>
+        <!-- เมนูแนวนอน ปรับขนาดอัตโนมัติ -->
+        <div class="menu-wrapper">
+          <v-btn text @click="$router.push('/about-me')">
+            <v-icon left>mdi-account</v-icon> ABOUT ME
+          </v-btn>
+          <v-btn text @click="$router.push('/all-project')">
+            <v-icon left>mdi-briefcase-variant</v-icon> PROJECTS
+          </v-btn>
+          <v-btn text @click="$router.push('/certificates')">
+            <v-icon left>mdi-certificate</v-icon> CERTIFICATES
+          </v-btn>
+          <v-btn text @click="$router.push('/contact')">
+            <v-icon left>mdi-email</v-icon> CONTACT
+          </v-btn>
+        </div>
+      </v-container>
     </v-app-bar>
-
-    <!-- Drawer สำหรับมือถือ -->
-    <v-navigation-drawer v-model="drawer" temporary class="d-sm-none">
-      <v-list nav>
-        <v-list-item @click="$router.push('/about-me')">
-          <v-icon left class="mr-2">mdi-account</v-icon> About Me
-        </v-list-item>
-        <v-list-item @click="$router.push('/all-project')">
-          <v-icon left class="mr-2">mdi-briefcase-variant</v-icon> Projects
-        </v-list-item>
-        <v-list-item @click="$router.push('/certificates')">
-          <v-icon left class="mr-2">mdi-certificate</v-icon> Certificates
-        </v-list-item>
-        <v-list-item @click="$router.push('/contact')">
-          <v-icon left class="mr-2">mdi-email</v-icon> Contact
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
 
     <v-main>
       <router-view />
@@ -59,13 +32,12 @@ const drawer = ref(false)
 </template>
 
 <style scoped>
-.v-app-bar {
+.navbar {
   box-shadow: 0 2px 10px rgba(255, 0, 255, 0.2);
-  padding-left: 16px;
-  padding-right: 16px;
 }
 
-.v-btn {
+/* ปุ่ม Navbar */
+.menu-wrapper .v-btn {
   font-weight: bold;
   letter-spacing: 0.5px;
   transition: 0.2s ease;
@@ -74,12 +46,54 @@ const drawer = ref(false)
   padding: 8px 16px;
 }
 
-.v-btn:hover {
+.menu-wrapper .v-btn:hover {
   color: #ff66cc;
 }
 
-.v-list-item {
-  font-weight: 500;
-  padding: 12px;
+/* Responsive ปรับขนาดให้พอดีกับทุกอุปกรณ์ */
+@media (max-width: 960px) {
+  .v-toolbar-title {
+    font-size: 20px;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 14px;
+    padding: 6px 10px;
+    margin: 0 2px;
+  }
+
+  .menu-wrapper .v-icon {
+    font-size: 18px;
+    margin-right: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .v-toolbar-title {
+    font-size: 16px;
+  }
+
+  .menu-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 13px;
+    padding: 4px 6px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .v-toolbar-title {
+    font-size: 24px;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
 }
 </style>
