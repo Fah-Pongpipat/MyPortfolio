@@ -3,7 +3,7 @@
 <template>
   <v-app>
     <v-app-bar app color="black" dark flat class="navbar">
-      <v-container class="d-flex align-center justify-space-between pa-0 flex-wrap">
+      <v-container class="d-flex align-center justify-space-between flex-wrap pa-0">
         <!-- Logo -->
         <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
@@ -34,70 +34,91 @@
 <style scoped>
 .navbar {
   box-shadow: 0 2px 10px rgba(255, 0, 255, 0.2);
-  padding: 0 16px;
+  padding: 0 12px;
 }
 
+/* Wrapper สำหรับเมนู */
 .menu-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  width: 100%;
   max-width: 100%;
-  overflow-x: auto;
 }
 
+/* ปุ่มเมนู */
 .menu-wrapper .v-btn {
   font-weight: bold;
-  letter-spacing: 0.5px;
-  transition: 0.2s ease;
-  color: white;
   font-size: 16px;
+  color: white;
+  padding: 6px 10px;
+  text-transform: none;
   white-space: nowrap;
-  padding: 6px 12px;
+  flex: 1 0 auto;
 }
 
 .menu-wrapper .v-btn:hover {
   color: #ff66cc;
 }
 
-.v-toolbar-title {
-  font-size: 20px;
-  white-space: nowrap;
-  padding-right: 16px;
+.menu-wrapper .v-icon {
+  font-size: 18px;
+  margin-right: 6px;
 }
 
-@media (max-width: 768px) {
-  .v-toolbar-title {
-    font-size: 18px;
-  }
+/* === Responsive === */
 
-  .menu-wrapper .v-btn {
-    font-size: 14px;
-    padding: 4px 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .v-toolbar-title {
-    font-size: 16px;
-  }
-
-  .menu-wrapper .v-btn {
-    font-size: 13px;
-    padding: 3px 6px;
-  }
-}
-
+/* Desktop ใหญ่ */
 @media (min-width: 1200px) {
   .v-toolbar-title {
     font-size: 24px;
   }
 
+  .menu-wrapper {
+    justify-content: flex-end;
+  }
+
   .menu-wrapper .v-btn {
     font-size: 18px;
     padding: 8px 16px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 960px) {
+  .v-toolbar-title {
+    font-size: 20px;
+  }
+
+  .menu-wrapper {
+    justify-content: center;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 15px;
+    padding: 6px 8px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .v-toolbar-title {
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .menu-wrapper {
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 13px;
+    padding: 5px 6px;
   }
 }
 </style>
