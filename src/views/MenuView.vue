@@ -38,17 +38,15 @@
   padding-right: 16px;
 }
 
-/* ✅ ตัวห่อเมนูทั้งหมด + logo */
 .menu-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
 }
 
-/* ✅ เมนูยืดได้และห่อ */
+/* ✅ เมนูห่อขึ้นบรรทัดเองได้ */
 .menu-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -56,18 +54,18 @@
   align-items: center;
   gap: 8px;
   flex: 1 1 auto;
-  max-width: 100%;
+  min-width: 0;
 }
 
-/* ปุ่มเมนู */
+/* ✅ ปุ่มเมนูยืดหยุ่น */
 .menu-wrapper .v-btn {
+  flex-shrink: 1;
   font-weight: bold;
   color: white;
-  font-size: 15px;
+  font-size: clamp(12px, 2vw, 16px); /* ปรับขนาดอัตโนมัติตามจอ */
   padding: 6px 10px;
   text-transform: none;
   white-space: nowrap;
-  transition: 0.3s;
 }
 
 .menu-wrapper .v-btn:hover {
@@ -80,14 +78,21 @@
 }
 
 /* Title responsive */
-@media (max-width: 600px) {
-  .v-toolbar-title {
-    font-size: 16px;
+.v-toolbar-title {
+  font-size: clamp(16px, 4vw, 22px);
+  white-space: nowrap;
+}
+
+/* ป้องกันล้นแนวนอน */
+@media (max-width: 480px) {
+  .menu-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
-  .menu-wrapper .v-btn {
-    font-size: 13px;
-    padding: 4px 8px;
+  .menu-wrapper {
+    justify-content: flex-start;
   }
 }
 </style>
