@@ -7,7 +7,7 @@
         <!-- Logo -->
         <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
-        <!-- เมนูเรียงในแถวเดียว -->
+        <!-- เมนูเรียงแนว Responsive -->
         <div class="menu-wrapper">
           <v-btn text @click="$router.push('/about-me')">
             <v-icon left>mdi-account</v-icon> ABOUT ME
@@ -32,37 +32,33 @@
 </template>
 
 <style scoped>
-/* ✅ Container ครอบทั้งแถบเมนู */
+/* ✅ Container สำหรับเมนู */
 .menu-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 12px;
-  overflow-x: auto; /* กันล้นในจอแคบ */
 }
 
-/* ✅ เมนูแนวนอนในแถวเดียว */
+/* ✅ เมนูแนวนอน (wrap เมื่อจอแคบ) */
 .menu-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-end;
-  flex: 1 1 auto;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  white-space: nowrap;
+  align-items: center;
   gap: 8px;
+  flex: 1 1 auto;
 }
 
 /* ✅ ปุ่มเมนู */
 .menu-wrapper .v-btn {
   font-weight: bold;
   color: white;
-  font-size: clamp(12px, 2vw, 16px);
-  padding: 6px 12px;
+  font-size: clamp(12px, 2.5vw, 16px);
+  padding: 6px 10px;
   text-transform: none;
   white-space: nowrap;
-  flex-shrink: 0; /* ป้องกันบีบขนาดปุ่ม */
 }
 
 .menu-wrapper .v-btn:hover {
@@ -74,11 +70,27 @@
   margin-right: 6px;
 }
 
-/* ✅ Logo ปรับขนาดได้ */
+/* ✅ โลโก้ปรับขนาดได้ */
 .v-toolbar-title {
   font-size: clamp(16px, 4vw, 22px);
   white-space: nowrap;
 }
 
-/* ✅ ไม่จำเป็นต้องปรับเพิ่มเติมใน media queries เพราะใช้ clamp + overflow-x auto แล้ว */
+/* ✅ แสดงเมนูชิดกลางเมื่อจอแคบ */
+@media (max-width: 600px) {
+  .menu-container {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .menu-wrapper {
+    justify-content: center;
+  }
+
+  .v-toolbar-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+}
 </style>
