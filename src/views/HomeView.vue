@@ -34,6 +34,8 @@
   color: white;
   font-family: 'Prompt', sans-serif;
   overflow: hidden;
+  padding: 32px 16px;
+  text-align: center;
 }
 
 /* สไลด์ลง */
@@ -56,9 +58,10 @@
 .intro-title {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 36px;
   color: #ffffff;
   text-shadow: 0 0 10px rgba(160, 32, 240, 0.3);
+  margin-bottom: 16px;
 }
 
 /* คำอธิบาย */
@@ -67,6 +70,8 @@
   font-weight: 300;
   line-height: 1.8;
   color: #dddddd;
+  max-width: 800px;
+  margin: 0 auto 32px;
 }
 
 /* ปุ่มเรืองแสง */
@@ -121,8 +126,64 @@
 .v-avatar {
   position: relative;
   z-index: 1;
+  width: 460px;
+  height: 460px;
+  max-width: 100%;
+  max-height: 100%;
   box-shadow:
     0 0 25px rgba(255, 102, 255, 0.4),
     0 0 45px rgba(136, 84, 208, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .intro-title {
+    font-size: 30px;
+  }
+  .intro-desc {
+    font-size: 16px;
+  }
+  .v-avatar {
+    width: 360px;
+    height: 360px;
+  }
+  .avatar-wrapper::before {
+    width: 360px;
+    height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-title {
+    font-size: 26px;
+  }
+  .intro-desc {
+    font-size: 15px;
+  }
+  .v-avatar {
+    width: 280px;
+    height: 280px;
+  }
+  .avatar-wrapper::before {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-title {
+    font-size: 22px;
+  }
+  .intro-desc {
+    font-size: 14px;
+  }
+  .v-avatar {
+    width: 220px;
+    height: 220px;
+  }
+  .avatar-wrapper::before {
+    width: 220px;
+    height: 220px;
+  }
 }
 </style>
