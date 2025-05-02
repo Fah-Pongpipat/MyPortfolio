@@ -3,11 +3,11 @@
 <template>
   <v-app>
     <v-app-bar app color="black" dark flat class="navbar">
-      <v-container class="menu-container">
+      <v-container class="d-flex align-center justify-space-between pa-0 flex-wrap">
         <!-- Logo -->
         <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
-        <!-- เมนู -->
+        <!-- เมนูแนวนอน -->
         <div class="menu-wrapper">
           <v-btn text @click="$router.push('/about-me')">
             <v-icon left>mdi-account</v-icon> ABOUT ME
@@ -38,34 +38,22 @@
   padding-right: 16px;
 }
 
-.menu-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-/* ✅ เมนูห่อขึ้นบรรทัดเองได้ */
+/* ปุ่มเมนู */
 .menu-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  flex: 1 1 auto;
-  min-width: 0;
 }
 
-/* ✅ ปุ่มเมนูยืดหยุ่น */
 .menu-wrapper .v-btn {
-  flex-shrink: 1;
   font-weight: bold;
   color: white;
-  font-size: clamp(12px, 2vw, 16px); /* ปรับขนาดอัตโนมัติตามจอ */
+  font-size: 16px;
   padding: 6px 10px;
   text-transform: none;
-  white-space: nowrap;
+  white-space: nowrap; /* ป้องกันตัดบรรทัดในปุ่ม */
 }
 
 .menu-wrapper .v-btn:hover {
@@ -77,22 +65,46 @@
   margin-right: 6px;
 }
 
-/* Title responsive */
-.v-toolbar-title {
-  font-size: clamp(16px, 4vw, 22px);
-  white-space: nowrap;
+/* Desktop ใหญ่ */
+@media (min-width: 1200px) {
+  .menu-wrapper .v-btn {
+    font-size: 18px;
+    padding: 10px 16px;
+  }
 }
 
-/* ป้องกันล้นแนวนอน */
-@media (max-width: 480px) {
-  .menu-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+/* Tablet */
+@media (max-width: 960px) {
+  .v-toolbar-title {
+    font-size: 20px;
   }
 
   .menu-wrapper {
-    justify-content: flex-start;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 15px;
+    padding: 6px 8px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .v-toolbar-title {
+    font-size: 18px;
+  }
+
+  .menu-wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .menu-wrapper .v-btn {
+    font-size: 13px;
+    padding: 4px 6px;
   }
 }
 </style>
