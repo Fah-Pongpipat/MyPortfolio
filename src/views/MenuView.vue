@@ -7,7 +7,7 @@
         <!-- Logo -->
         <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
-        <!-- เมนูเรียงแนว Responsive -->
+        <!-- เมนูเรียงในแถวเดียว + scroll ได้ถ้าจอแคบ -->
         <div class="menu-wrapper">
           <v-btn text @click="$router.push('/about-me')">
             <v-icon left>mdi-account</v-icon> ABOUT ME
@@ -32,32 +32,36 @@
 </template>
 
 <style scoped>
-/* ✅ Container สำหรับเมนู */
+/* Container หลักของแถบเมนู */
 .menu-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
-/* ✅ เมนูแนวนอน (wrap เมื่อจอแคบ) */
+/* เมนูแนวนอน แบบ scroll ได้ */
 .menu-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
   gap: 8px;
-  flex: 1 1 auto;
+  flex: 1;
+  justify-content: flex-end;
 }
 
-/* ✅ ปุ่มเมนู */
+/* ปุ่มเมนู */
 .menu-wrapper .v-btn {
   font-weight: bold;
   color: white;
   font-size: clamp(12px, 2.5vw, 16px);
-  padding: 6px 10px;
+  padding: 6px 12px;
   text-transform: none;
+  flex-shrink: 0; /* ป้องกันหดปุ่ม */
   white-space: nowrap;
 }
 
@@ -70,27 +74,9 @@
   margin-right: 6px;
 }
 
-/* ✅ โลโก้ปรับขนาดได้ */
+/* ชื่อโลโก้ */
 .v-toolbar-title {
   font-size: clamp(16px, 4vw, 22px);
   white-space: nowrap;
-}
-
-/* ✅ แสดงเมนูชิดกลางเมื่อจอแคบ */
-@media (max-width: 600px) {
-  .menu-container {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .menu-wrapper {
-    justify-content: center;
-  }
-
-  .v-toolbar-title {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 4px;
-  }
 }
 </style>
