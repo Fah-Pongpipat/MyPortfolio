@@ -32,52 +32,58 @@
 </template>
 
 <style scoped>
+/* แถบ Navbar */
 .v-app-bar {
   box-shadow: 0 2px 10px rgba(255, 0, 255, 0.2);
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-/* ปุ่มใน Navbar */
+/* ชื่อเว็บ */
+.v-toolbar-title {
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* ปุ่มเมนู */
 .v-btn {
   font-weight: bold;
   letter-spacing: 0.5px;
   transition: 0.2s ease;
   color: white;
-  font-size: 16px;
-  padding: 8px 16px;
+  font-size: clamp(14px, 2.5vw, 18px);
+  padding: 6px 12px;
+  text-transform: none;
+  min-width: auto;
 }
 
+/* ไอคอนซ้ายของปุ่ม */
+.v-btn .v-icon {
+  font-size: clamp(16px, 2.5vw, 20px);
+  margin-right: 6px;
+}
+
+/* Hover effect */
 .v-btn:hover {
   color: #ff66cc;
 }
 
-/* 🔽 Responsive สำหรับหน้าจอเล็ก (มือถือ) */
+/* ปรับขนาดพิเศษบนมือถือ */
 @media (max-width: 600px) {
-  .v-toolbar-title {
-    font-size: 18px;
+  .v-app-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 12px;
   }
 
   .v-btn {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .v-icon {
-    font-size: 18px !important;
-    margin-right: 4px !important;
-  }
-}
-
-/* 🔼 Responsive สำหรับหน้าจอใหญ่ */
-@media (min-width: 1200px) {
-  .v-toolbar-title {
-    font-size: 26px;
-  }
-
-  .v-btn {
-    font-size: 18px;
-    padding: 10px 20px;
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 0;
   }
 }
 </style>
