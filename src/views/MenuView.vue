@@ -3,11 +3,11 @@
 <template>
   <v-app>
     <v-app-bar app color="black" dark flat class="navbar">
-      <v-container class="d-flex align-center justify-space-between pa-0 flex-wrap">
+      <v-container class="menu-container">
         <!-- Logo -->
         <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
-        <!-- เมนูแนวนอน -->
+        <!-- เมนูเรียงในแถวเดียว -->
         <div class="menu-wrapper">
           <v-btn text @click="$router.push('/about-me')">
             <v-icon left>mdi-account</v-icon> ABOUT ME
@@ -32,28 +32,37 @@
 </template>
 
 <style scoped>
-.navbar {
-  box-shadow: 0 2px 10px rgba(255, 0, 255, 0.2);
-  padding-left: 16px;
-  padding-right: 16px;
+/* ✅ Container ครอบทั้งแถบเมนู */
+.menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 12px;
+  overflow-x: auto; /* กันล้นในจอแคบ */
 }
 
-/* ปุ่มเมนู */
+/* ✅ เมนูแนวนอนในแถวเดียว */
 .menu-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: flex-end;
-  align-items: center;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
   gap: 8px;
 }
 
+/* ✅ ปุ่มเมนู */
 .menu-wrapper .v-btn {
   font-weight: bold;
   color: white;
-  font-size: 16px;
-  padding: 6px 10px;
+  font-size: clamp(12px, 2vw, 16px);
+  padding: 6px 12px;
   text-transform: none;
-  white-space: nowrap; /* ป้องกันตัดบรรทัดในปุ่ม */
+  white-space: nowrap;
+  flex-shrink: 0; /* ป้องกันบีบขนาดปุ่ม */
 }
 
 .menu-wrapper .v-btn:hover {
@@ -65,46 +74,11 @@
   margin-right: 6px;
 }
 
-/* Desktop ใหญ่ */
-@media (min-width: 1200px) {
-  .menu-wrapper .v-btn {
-    font-size: 18px;
-    padding: 10px 16px;
-  }
+/* ✅ Logo ปรับขนาดได้ */
+.v-toolbar-title {
+  font-size: clamp(16px, 4vw, 22px);
+  white-space: nowrap;
 }
 
-/* Tablet */
-@media (max-width: 960px) {
-  .v-toolbar-title {
-    font-size: 20px;
-  }
-
-  .menu-wrapper {
-    justify-content: center;
-    gap: 6px;
-  }
-
-  .menu-wrapper .v-btn {
-    font-size: 15px;
-    padding: 6px 8px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .v-toolbar-title {
-    font-size: 18px;
-  }
-
-  .menu-wrapper {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px;
-  }
-
-  .menu-wrapper .v-btn {
-    font-size: 13px;
-    padding: 4px 6px;
-  }
-}
+/* ✅ ไม่จำเป็นต้องปรับเพิ่มเติมใน media queries เพราะใช้ clamp + overflow-x auto แล้ว */
 </style>
