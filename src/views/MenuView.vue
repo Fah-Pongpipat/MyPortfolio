@@ -7,20 +7,22 @@
         <!-- Logo -->
         <v-toolbar-title class="font-weight-bold">My Portfolio</v-toolbar-title>
 
-        <!-- เมนูเรียงในแถวเดียว + scroll ได้ถ้าจอแคบ -->
+        <!-- แถบเมนูแนวนอนแบบ scroll ได้ถ้าจอแคบ -->
         <div class="menu-wrapper">
-          <v-btn text @click="$router.push('/about-me')">
-            <v-icon left>mdi-account</v-icon> ABOUT ME
-          </v-btn>
-          <v-btn text @click="$router.push('/all-project')">
-            <v-icon left>mdi-briefcase-variant</v-icon> PROJECTS
-          </v-btn>
-          <v-btn text @click="$router.push('/certificates')">
-            <v-icon left>mdi-certificate</v-icon> CERTIFICATES
-          </v-btn>
-          <v-btn text @click="$router.push('/contact')">
-            <v-icon left>mdi-email</v-icon> CONTACT
-          </v-btn>
+          <div class="menu-scroll">
+            <v-btn text @click="$router.push('/about-me')">
+              <v-icon left>mdi-account</v-icon> ABOUT ME
+            </v-btn>
+            <v-btn text @click="$router.push('/all-project')">
+              <v-icon left>mdi-briefcase-variant</v-icon> PROJECTS
+            </v-btn>
+            <v-btn text @click="$router.push('/certificates')">
+              <v-icon left>mdi-certificate</v-icon> CERTIFICATES
+            </v-btn>
+            <v-btn text @click="$router.push('/contact')">
+              <v-icon left>mdi-email</v-icon> CONTACT
+            </v-btn>
+          </div>
         </div>
       </v-container>
     </v-app-bar>
@@ -32,49 +34,50 @@
 </template>
 
 <style scoped>
-/* Container หลักของแถบเมนู */
+/* ✅ Container สำหรับแถบเมนู */
 .menu-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  align-items: center;
   flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 0 8px;
+}
+
+/* ✅ Wrapper ครอบเมนู (บังคับความกว้าง และ scroll แนวนอนถ้าจอแคบ) */
+.menu-wrapper {
+  flex-grow: 1;
   overflow-x: auto;
 }
 
-/* เมนูแนวนอน แบบ scroll ได้ */
-.menu-wrapper {
+/* ✅ Scroll เมนู */
+.menu-scroll {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  gap: 12px;
   white-space: nowrap;
-  gap: 8px;
-  flex: 1;
-  justify-content: flex-end;
 }
 
-/* ปุ่มเมนู */
-.menu-wrapper .v-btn {
+/* ✅ ปุ่มเมนู */
+.menu-scroll .v-btn {
   font-weight: bold;
   color: white;
-  font-size: clamp(12px, 2.5vw, 16px);
-  padding: 6px 12px;
+  font-size: clamp(13px, 2.5vw, 16px);
+  padding: 6px 10px;
   text-transform: none;
-  flex-shrink: 0; /* ป้องกันหดปุ่ม */
-  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.menu-wrapper .v-btn:hover {
+.menu-scroll .v-btn:hover {
   color: #ff66cc;
 }
 
-.menu-wrapper .v-icon {
+.menu-scroll .v-icon {
   font-size: 18px;
-  margin-right: 6px;
+  margin-right: 4px;
 }
 
-/* ชื่อโลโก้ */
+/* ✅ ชื่อโลโก้ */
 .v-toolbar-title {
   font-size: clamp(16px, 4vw, 22px);
   white-space: nowrap;
