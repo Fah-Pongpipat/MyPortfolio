@@ -11,14 +11,6 @@ const educationList = [
     gpa: '2.98',
     image: buraphaLogo,
   },
-  {
-    title: 'บดินทรเดชา (สิงห์ สิงหเสนี) สมุทรปราการ',
-    degree: 'มัธยมศึกษาตอนปลาย',
-    major: 'ศิลป์คํานวณ',
-    year: '2018–2021',
-    gpa: '2.82',
-    image: bdsLogo,
-  },
 ]
 const skills = [
   {
@@ -27,7 +19,7 @@ const skills = [
   },
   {
     title: '⚙️ เฟรมเวิร์ก',
-    items: ['Vue.js', 'Vuetify', 'Node.js', 'Nest.js'],
+    items: ['Vue.js', 'Vuetify', 'Node.js', 'Nest.js', 'React'],
   },
   {
     title: '🛠 เครื่องมือพัฒนา',
@@ -46,47 +38,101 @@ const skills = [
 
 <template>
   <v-app>
-    <v-app-bar app color="black" dark flat>
-      <MenuViewVue></MenuViewVue>
+    <v-app-bar app color="white" flat class="minimal-appbar">
+      <MenuViewVue />
     </v-app-bar>
-
-    <v-main class="bg-black fade-in">
-      <v-container class="pa-12 text-white">
-        <h2 class="header-project-title">ประวัติการศึกษา</h2>
-
-        <v-carousel
-          hide-delimiter-background
-          height="480"
-          cycle
-          show-arrows
-          class="education-carousel custom-carousel"
-          :prev-icon="'mdi-chevron-left'"
-          :next-icon="'mdi-chevron-right'"
-        >
-          <v-carousel-item v-for="(item, index) in educationList" :key="index">
-            <div class="education-slide d-flex flex-column align-center justify-center text-center">
-              <v-avatar size="200" class="mb-6 mt-8 neon-avatar">
-                <img :src="item.image" alt="education image" />
-              </v-avatar>
-              <h3 class="text-h5 font-weight-bold mb-1">{{ item.degree }}</h3>
-              <p class="text-subtitle-1 mb-1">{{ item.title }}</p>
-              <p v-if="item.major" class="mb-1">📘 {{ item.major }}</p>
-              <p class="mb-1">📅 {{ item.year }}</p>
-              <p>📊 GPA: {{ item.gpa }}</p>
-            </div>
-          </v-carousel-item>
-        </v-carousel>
+    <v-main class="minimal-bg">
+      <v-container class="py-12">
+        <h2 class="minimal-title mb-10">
+          <v-icon color="pink lighten-2" size="36" class="mr-2">mdi-heart</v-icon>
+          ประวัติการศึกษา
+        </h2>
+        <v-row justify="center" align="stretch" class="education-row">
+          <v-col
+            cols="12"
+            md="8"
+            lg="6"
+            v-for="(item, index) in educationList"
+            :key="index"
+            class="d-flex"
+          >
+            <v-card class="minimal-card pa-6 ml-14" elevation="2" rounded="xl">
+              <v-row align="center" no-gutters>
+                <v-col cols="12" md="4" class="d-flex justify-center align-center">
+                  <div class="edu-avatar-wrapper">
+                    <v-avatar size="110" class="minimal-avatar">
+                      <img :src="item.image" alt="education image" />
+                    </v-avatar>
+                    <v-icon
+                      class="edu-badge-minimal"
+                      color="blue lighten-2"
+                      size="28"
+                      style="position: absolute; bottom: -8px; right: -8px"
+                    >
+                      mdi-school-outline
+                    </v-icon>
+                  </div>
+                </v-col>
+                <v-col cols="12" md="8">
+                  <div class="pl-md-6 pt-4 pt-md-0">
+                    <h3 class="minimal-card-title mb-2">
+                      {{ item.title }}
+                    </h3>
+                    <div class="mb-2 d-flex align-center flex-wrap">
+                      <v-chip color="pink lighten-4" text-color="pink darken-2" class="mr-2" small>
+                        {{ item.degree }}
+                      </v-chip>
+                      <span v-if="item.major" class="ml-1 minimal-major"
+                        >สาขา: <strong>{{ item.major }}</strong></span
+                      >
+                    </div>
+                    <div class="mb-2 d-flex align-center">
+                      <v-icon left small color="blue lighten-2" class="mr-1">mdi-calendar</v-icon>
+                      <span>{{ item.year }}</span>
+                    </div>
+                    <div class="d-flex align-center">
+                      <v-icon left small color="amber lighten-2" class="mr-1">mdi-star-face</v-icon>
+                      GPA: <strong class="ml-1">{{ item.gpa }}</strong>
+                    </div>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-container>
 
-      <v-container class="my-12 fade-in">
-        <h2 class="text-center font-weight-bold mb-8">ทักษะที่เชี่ยวชาญ</h2>
-
-        <v-row dense>
-          <v-col cols="12" md="6" lg="4" v-for="(category, index) in skills" :key="index">
-            <v-card class="skill-card h-100" dark elevation="4">
-              <h3>{{ category.title }}</h3>
-              <div class="d-flex flex-wrap gap-2">
-                <v-chip v-for="(skill, i) in category.items" :key="i" class="skill-chip ma-1">
+      <v-container class="my-12">
+        <h2 class="minimal-title text-center mb-8">
+          <v-icon color="blue lighten-2" size="32" class="mr-2">mdi-palette</v-icon>
+          ทักษะที่เชี่ยวชาญ
+        </h2>
+        <v-row dense align="stretch">
+          <v-col
+            v-for="(category, index) in skills"
+            :key="index"
+            cols="12"
+            md="6"
+            lg="4"
+            class="d-flex justify-center"
+          >
+            <v-card
+              class="minimal-card skill-card-minimal skill-card-fixed h-100 d-flex flex-column justify-space-between"
+              elevation="1"
+              rounded="lg"
+            >
+              <h3 class="minimal-skill-title mb-4 text-center">
+                {{ category.title }}
+              </h3>
+              <div class="d-flex flex-wrap justify-center gap-2 flex-grow-1 align-content-start">
+                <v-chip
+                  v-for="(skill, i) in category.items"
+                  :key="i"
+                  class="skill-chip-minimal ma-1"
+                  color="blue lighten-5"
+                  text-color="blue darken-2"
+                  small
+                >
                   {{ skill }}
                 </v-chip>
               </div>
@@ -95,20 +141,30 @@ const skills = [
         </v-row>
       </v-container>
 
-      <v-container class="my-12 goal-section fancy-goal-container fade-in">
-        <div class="goal-header d-flex align-center mb-4">
-          <v-icon size="36" color="cyan" class="mr-2 glow-icon">mdi-target</v-icon>
-          <h2 class="goal-title">เป้าหมายของฉัน</h2>
+      <v-container class="my-12 goal-section-minimal fade-in modern-goal-section">
+        <div class="goal-header d-flex align-center mb-6 justify-center">
+          <div class="goal-icon-bg mr-3">
+            <v-icon size="36" color="pink lighten-2">mdi-bullseye-arrow</v-icon>
+          </div>
+          <h2 class="goal-title-minimal">เป้าหมายของฉัน</h2>
         </div>
-
-        <v-card class="goal-card" flat>
-          <v-card-text class="goal-text">
-            ผมมีความมุ่งมั่นที่จะทำงานในตำแหน่ง <strong>Backend Developer</strong> หรือ
-            <strong>Frontend Developer</strong><br />
-            เพราะผมสนใจทั้งด้านการพัฒนาโครงสร้างระบบและการออกแบบประสบการณ์ผู้ใช้ โดยเฉพาะในส่วนของ
-            <strong>Backend</strong> ผมมีความสนใจในกระบวนการเขียนโปรแกรมที่เกี่ยวข้องกับการออกแบบ
-            API, การเชื่อมต่อกับฐานข้อมูล และการสร้างระบบที่มีประสิทธิภาพและปลอดภัย<br />
-            ผมเชื่อว่าความเข้าใจในทั้งสองฝั่งจะช่วยให้ผมสามารถพัฒนาระบบที่ตอบโจทย์ผู้ใช้งานได้อย่างรอบด้าน
+        <v-card class="goal-card-minimal modern-goal-card" flat>
+          <v-card-text class="goal-text-minimal modern-goal-text">
+            <span class="goal-highlight">ผมมีความมุ่งมั่นที่จะทำงานในตำแหน่ง</span>
+            <strong>Backend Developer</strong> หรือ <strong>Frontend Developer</strong>
+            <br />
+            <span class="goal-highlight">
+              เพราะผมสนใจทั้งด้านการพัฒนาโครงสร้างระบบและการออกแบบประสบการณ์ผู้ใช้ โดยเฉพาะในส่วนของ
+              <strong>Backend</strong>
+            </span>
+            <span class="goal-highlight">
+              ผมมีความสนใจในกระบวนการเขียนโปรแกรมที่เกี่ยวข้องกับการออกแบบ API,
+              การเชื่อมต่อกับฐานข้อมูล และการสร้างระบบที่มีประสิทธิภาพและปลอดภัย
+            </span>
+            <br />
+            <span class="goal-highlight">
+              ผมเชื่อว่าความเข้าใจในทั้งสองฝั่งจะช่วยให้ผมสามารถพัฒนาระบบที่ตอบโจทย์ผู้ใช้งานได้อย่างรอบด้าน
+            </span>
           </v-card-text>
         </v-card>
       </v-container>
@@ -117,129 +173,266 @@ const skills = [
 </template>
 
 <style scoped>
-.header-project-title {
-  font-size: 42px;
-  font-weight: 800;
-  text-align: center;
-  color: transparent;
-  background-image: linear-gradient(to right, #a86af0, #4fc3f7, #6ffff8); /* purple to sky cyan */
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 1.5px;
-  margin-bottom: 40px;
-  text-shadow:
-    0 0 6px rgba(111, 255, 248, 0.2),
-    0 0 18px rgba(178, 106, 255, 0.35);
-}
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
-.fancy-goal-container {
-  max-width: 900px;
-  margin: 0 auto;
+.modern-goal-section {
+  background: linear-gradient(120deg, #e3f0ff 60%, #ffe3f6 100%);
+  border-radius: 32px;
+  box-shadow: 0 6px 32px 0 #e3f2fd99;
+  padding: 48px 32px 40px 32px;
+  max-width: 800px;
+  margin: 0 auto 48px auto;
+  position: relative;
+  overflow: hidden;
 }
-
 .goal-header {
+  position: relative;
+  z-index: 2;
+}
+.goal-icon-bg {
+  background: linear-gradient(135deg, #f8bbd0 60%, #e3f0ff 100%);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px #f8bbd055;
+}
+.goal-title-minimal {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #e75480;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
+  letter-spacing: 1px;
+}
+.modern-goal-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 2px 16px #b3e5fc33;
+  border: 1.5px solid #f8bbd0;
+  margin-top: 18px;
+  padding: 0;
+}
+.modern-goal-text {
+  font-size: 1.15rem;
+  line-height: 2.1;
+  color: #374151;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
+  padding: 36px 32px 32px 32px;
+  text-align: center;
+  background: transparent;
+  border-radius: 20px;
+  position: relative;
+  z-index: 2;
+}
+.goal-highlight {
+  display: inline-block;
+  background: linear-gradient(90deg, #e3f0ff 60%, #ffe3f6 100%);
+  border-radius: 12px;
+  padding: 2px 10px;
+  margin: 0 0 6px 0;
+  color: #2196f3;
+  font-weight: 600;
+  font-size: 1.08em;
+}
+@media (max-width: 600px) {
+  .modern-goal-section {
+    padding: 24px 6px 24px 6px;
+  }
+  .modern-goal-text {
+    padding: 18px 6px 18px 6px;
+    font-size: 1rem;
+  }
+  .goal-title-minimal {
+    font-size: 1.2rem;
+  }
+  .goal-icon-bg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.skill-card-fixed {
+  width: 100%;
+  max-width: 370px;
+  min-width: 270px;
+  min-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.minimal-bg {
+  /* พื้นหลังไล่เฉดสีฟ้าอ่อน ชมพูอ่อน และขาว */
+  background: linear-gradient(135deg, #e3f0ff 0%, #ffe3f6 50%, #ffffff 100%);
+  min-height: 100vh;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* วงกลมตกแต่งพื้นหลัง */
+.minimal-bg::before,
+.minimal-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.minimal-bg::before {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #b3e5fc 60%, #e3f0ff 100%);
+  top: -120px;
+  left: -120px;
+}
+.minimal-bg::after {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, #f8bbd0 60%, #ffe3f6 100%);
+  bottom: -100px;
+  right: -100px;
+}
+
+.v-main {
+  position: relative;
+  z-index: 2;
+}
+
+.minimal-appbar {
+  box-shadow: none;
+  border-bottom: 1.5px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.minimal-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #e75480;
+  letter-spacing: 1px;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.goal-title {
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+.education-row {
+  gap: 24px 0;
 }
 
-.goal-card {
-  background-color: #121212;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+.minimal-card {
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 4px 24px 0 #f3e8ee;
+  border: 1.5px solid #f3e8ee;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
-.goal-card:hover {
-  box-shadow: 0 6px 24px rgba(0, 255, 255, 0.12);
-}
-.goal-text {
-  font-size: 18px;
-  line-height: 1.9;
-  color: #e0e0e0;
-  text-align: justify;
-  font-family: 'Sarabun', 'Prompt', sans-serif;
+.minimal-card:hover {
+  box-shadow: 0 8px 32px 0 #f8bbd0;
+  border-color: #f8bbd0;
 }
 
-.goal-text strong {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.glow-icon {
-  text-shadow:
-    0 0 8px #00fff0,
-    0 0 12px #a020f0;
-}
-
-/* Card container ของแต่ละหมวดทักษะ */
-.skill-card {
-  border-radius: 20px;
-  padding: 24px;
-  background: linear-gradient(145deg, #1c1c1c, #121212);
-  box-shadow:
-    0 0 10px #00ffc3,
-    0 0 20px #00cfff,
-    0 0 30px rgba(0, 255, 213, 0.4);
+.edu-avatar-wrapper {
   position: relative;
-  overflow: hidden;
-  transition: 0.3s ease-in-out;
+  display: inline-block;
+}
+.minimal-avatar {
+  border: 3px solid #f8bbd0;
+  background: #fff;
+  box-shadow: 0 2px 12px #f8bbd055;
+  padding: 4px;
+}
+.edu-badge-minimal {
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #b3e5fc;
+  box-shadow: 0 0 6px #b3e5fc80;
 }
 
-.skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow:
-    0 0 15px #00ffc3,
-    0 0 25px #00cfff,
-    0 0 40px rgba(0, 255, 213, 0.6);
+.minimal-card-title {
+  color: #374151;
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
 }
 
-/* หัวข้อของแต่ละหมวด */
-.skill-card h3 {
-  color: #00fff0;
+.minimal-major {
+  color: #7b809a;
+  font-size: 1rem;
+}
+
+.skill-card-minimal {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px #e3f2fd;
+  border: 1.5px solid #e3f2fd;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+.skill-card-minimal:hover {
+  box-shadow: 0 6px 24px #b3e5fc;
+  border-color: #b3e5fc;
+}
+.minimal-skill-title {
+  color: #2196f3;
   font-weight: 600;
   margin-bottom: 16px;
-  font-size: 18px;
+  font-size: 1.1rem;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
 }
-
-/* ปรับปุ่ม chip */
-.skill-chip {
+.skill-chip-minimal {
   border-radius: 999px;
   font-weight: 500;
   font-size: 14px;
-  background-color: #00ffff;
-  color: #000 !important;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+  background-color: #e3f2fd !important;
+  color: #1976d2 !important;
+  transition: all 0.2s;
+  box-shadow: 0 0 4px #b3e5fc55;
+}
+.skill-chip-minimal:hover {
+  background-color: #f8bbd0 !important;
+  color: #e75480 !important;
 }
 
-.skill-chip:hover {
-  transform: scale(1.05);
-  box-shadow:
-    0 0 10px #00ffff,
-    0 0 15px rgba(0, 255, 255, 0.6);
+.goal-section-minimal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 24px;
+  box-shadow: 0 2px 16px #f8bbd055;
+  border: 1.5px solid #f8bbd0;
+  max-width: 900px;
+  margin: 0 auto;
 }
-
-/* ปรับปุ่มเลื่อนให้ดูสุภาพ */
-.custom-carousel ::v-deep(.v-carousel__prev),
-.custom-carousel ::v-deep(.v-carousel__next) {
-  background-color: rgba(200, 200, 200, 0.2);
-  color: #ffffff;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  transition: background-color 0.3s ease;
+.goal-title-minimal {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e75480;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
 }
-.custom-carousel ::v-deep(.v-carousel__prev:hover),
-.custom-carousel ::v-deep(.v-carousel__next:hover) {
-  background-color: rgba(100, 100, 100, 0.3);
+.goal-card-minimal {
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+.goal-text-minimal {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: #374151;
+  text-align: justify;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
+}
+.goal-text-minimal strong {
+  color: #e75480;
+  font-weight: 700;
 }
 
 .fade-in {
@@ -254,93 +447,5 @@ const skills = [
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.education-title {
-  font-size: 38px;
-  font-weight: 700;
-  text-align: center;
-  color: #e6e6e6;
-  font-family: 'Sarabun', 'Prompt', sans-serif;
-  margin-bottom: 32px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.neon-avatar {
-  border: 3px solid #4a90e2;
-  box-shadow: none;
-  background-color: #f0f0f0;
-  padding: 4px;
-}
-.v-avatar img {
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.goal-section {
-  background-color: #121212;
-  border-radius: 16px;
-  padding: 40px;
-}
-.career-goal {
-  font-size: 20px;
-  line-height: 1.8;
-  color: #ffffff;
-  font-weight: 400;
-  text-align: justify;
-  max-width: 1800px;
-  margin: 0 auto;
-}
-
-.blackground-v-card {
-  border: 2px solid #99f3bc;
-  box-shadow:
-    0 0 12px #6febd6,
-    0 0 22px #1dd417,
-    0 0 36px rgba(158, 247, 155, 0.5);
-  transition: 0.3s ease;
-}
-
-.glow-background::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, #00ffff40, #00ffab10, transparent 70%);
-  transform: translate(-50%, -50%);
-  filter: blur(100px);
-  z-index: -1;
-}
-
-html,
-body,
-#app {
-  background-color: black;
-  margin: 0;
-  height: 100%;
-}
-
-.education-slide p,
-.education-slide h3 {
-  color: #e0e0e0;
-  font-family: 'Sarabun', sans-serif;
-}
-
-.education-slide h3 {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.education-slide p {
-  font-size: 16px;
-  margin-bottom: 6px;
-  color: #cccccc;
-}
-.education-carousel .v-carousel__controls {
-  margin-top: 80px;
-  position: relative;
-  z-index: 1;
 }
 </style>
