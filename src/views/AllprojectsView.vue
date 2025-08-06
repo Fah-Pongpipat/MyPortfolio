@@ -89,7 +89,7 @@ const openDialog = (project: any) => {
     </v-app-bar>
 
     <!-- ✅ Project List -->
-    <v-main class="bg-black py-12">
+    <v-main class="minimal-bg py-12">
       <v-container class="fade-in">
         <h2 class="header-project-title">My Projects</h2>
 
@@ -129,6 +129,40 @@ const openDialog = (project: any) => {
 </template>
 
 <style scoped>
+/* พื้นหลังแนวมินิมอล ฟ้าอ่อน ชมพูอ่อน ขาว */
+.minimal-bg {
+  background: linear-gradient(135deg, #e3f0ff 0%, #ffe3f6 50%, #ffffff 100%);
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* วงกลมตกแต่งพื้นหลัง */
+.minimal-bg::before,
+.minimal-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.minimal-bg::before {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #b3e5fc 60%, #e3f0ff 100%);
+  top: -120px;
+  left: -120px;
+}
+.minimal-bg::after {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, #f8bbd0 60%, #ffe3f6 100%);
+  bottom: -100px;
+  right: -100px;
+}
+
 .fade-in {
   opacity: 0;
   animation: fadeIn 1.2s ease-out forwards;
