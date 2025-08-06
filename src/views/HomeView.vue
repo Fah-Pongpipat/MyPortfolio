@@ -161,7 +161,7 @@
 /* ปุ่มใหม่ */
 .cafe-button {
   padding: 12px 36px;
-  font-size: 20px;
+  font-size: clamp(14px, 2vw, 18px);
   font-family: 'Itim', 'Kanit', cursive, sans-serif;
   font-weight: 700;
   color: #5b3e65; /* ม่วงเข้มนิดๆ อ่านง่าย */
