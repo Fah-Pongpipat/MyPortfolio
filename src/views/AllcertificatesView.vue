@@ -59,7 +59,7 @@ function openDialog(cert: { title: string; image: string }) {
       <MenuViewVue></MenuViewVue>
     </v-app-bar>
 
-    <v-main class="bg-black py-12">
+    <v-main class="minimal-bg py-12">
       <div class="fade-in-wrapper">
         <v-container>
           <h2 class="header-project-title">Certificates</h2>
@@ -89,12 +89,46 @@ function openDialog(cert: { title: string; image: string }) {
 </template>
 
 <style scoped>
+/* พื้นหลังแนวมินิมอล ฟ้าอ่อน ชมพูอ่อน ขาว */
+.minimal-bg {
+  background: linear-gradient(135deg, #e3f0ff 0%, #ffe3f6 50%, #ffffff 100%);
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* วงกลมตกแต่งพื้นหลัง */
+.minimal-bg::before,
+.minimal-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.minimal-bg::before {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #b3e5fc 60%, #e3f0ff 100%);
+  top: -120px;
+  left: -120px;
+}
+.minimal-bg::after {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, #f8bbd0 60%, #ffe3f6 100%);
+  bottom: -100px;
+  right: -100px;
+}
+
 .header-project-title {
   font-size: 42px;
   font-weight: 800;
   text-align: center;
   color: transparent;
-  background-image: linear-gradient(to right, #9fffe2, #a1e4ff); /* mint to sky blue */
+  background-image: linear-gradient(to right, #011f16, #a1e4ff); /* mint to sky blue */
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
