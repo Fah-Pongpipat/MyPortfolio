@@ -2,38 +2,87 @@
 import MenuViewVue from './MenuView.vue'
 import buraphaLogo from '../images/Logo_of_Burapha_University.png'
 import bdsLogo from '../images/BDSLogo.jpg'
+import { computed, ref } from 'vue'
+import { useLanguageStore } from '@/stores/language'
+
+const languageStore = useLanguageStore()
+const isLoading = ref(false)
+function switchLanguage() {
+  // สลับภาษาและบันทึกลง localStorage
+  languageStore.currnetedLanguage = languageStore.currnetedLanguage === 'TH' ? 'ENG' : 'TH'
+  localStorage.setItem('language', languageStore.currnetedLanguage)
+  showIsLoading()
+  // รีเฟรชหน้าเพื่อให้การเปลี่ยนแปลงมีผล
+}
+function showIsLoading() {
+  isLoading.value = true
+  setTimeout(() => {
+    isLoading.value = false
+  }, 500)
+}
 const educationList = [
   {
-    title: 'มหาวิทยาลัยบูรพา',
-    degree: 'ปริญญาตรี',
-    major: 'วิทยาการคอมพิวเตอร์',
+    title: { th: 'มหาวิทยาลัยบูรพา', en: 'Burapha University' },
+    degree: { th: 'ปริญญาตรี', en: "Bachelor's Degree" },
+    major: { th: 'วิทยาการคอมพิวเตอร์', en: 'Computer Science' },
     year: '2021–2025',
     gpa: '2.98',
     image: buraphaLogo,
   },
 ]
+const localizedEducationList = computed(() => {
+  return educationList.map((item) => ({
+    ...item,
+    title: languageStore.currnetedLanguage === 'TH' ? item.title.th : item.title.en,
+    degree: languageStore.currnetedLanguage === 'TH' ? item.degree.th : item.degree.en,
+    major: languageStore.currnetedLanguage === 'TH' ? item.major.th : item.major.en,
+  }))
+})
 const skills = [
   {
-    title: '💻 ภาษาโปรแกรม',
+    title: {
+      th: '💻 ภาษาโปรแกรม',
+      en: '💻 Programming Languages',
+    },
     items: ['Python', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'Java', 'Go'],
   },
   {
-    title: '⚙️ เฟรมเวิร์ก',
+    title: {
+      th: '⚙️ เฟรมเวิร์ก',
+      en: '⚙️ Frameworks',
+    },
     items: ['Vue.js', 'Vuetify', 'Node.js', 'Nest.js', 'React'],
   },
   {
-    title: '🛠 เครื่องมือพัฒนา',
+    title: {
+      th: '🛠 เครื่องมือพัฒนา',
+      en: '🛠 Development Tools',
+    },
     items: ['Git', 'GitHub', 'GitLab', 'Postman', 'Docker', 'Visual Studio Code'],
   },
   {
-    title: '🎨 การออกแบบ UI/UX',
+    title: {
+      th: '🎨 การออกแบบ UI/UX',
+      en: '🎨 UI/UX Design',
+    },
     items: ['Figma', 'Canva'],
   },
   {
-    title: '🗄️ ฐานข้อมูล (Databases)',
+    title: {
+      th: '🗄️ ฐานข้อมูล',
+      en: '🗄️ Databases',
+    },
     items: ['MySQL', 'SQLite', 'Mongodb'],
   },
 ]
+
+const localizedSkills = computed(() => {
+  return skills.map((item) => ({
+    ...item,
+    title: languageStore.currnetedLanguage === 'TH' ? item.title.th : item.title.en,
+    items: item.items, // ไม่มีแปล skill แสดงว่ามันเหมือนกันอยู่แล้ว
+  }))
+})
 </script>
 
 <template>
@@ -43,16 +92,33 @@ const skills = [
     </v-app-bar>
     <v-main class="minimal-bg">
       <v-container class="py-12">
+        <!-- ROW แรก: ปุ่มเปลี่ยนภาษา อยู่ฝั่งขวาสุด -->
+        <v-row>
+          <v-col cols="12" class="d-flex justify-end">
+            <v-btn class="lang-btn" @click="switchLanguage">
+              {{ languageStore.currnetedLanguage }}
+            </v-btn>
+          </v-col>
+        </v-row>
+
+        <!-- overlay loading -->
+        <v-overlay v-model="isLoading" class="d-flex align-center justify-center" absolute>
+          <v-progress-circular indeterminate size="64" color="pink" />
+        </v-overlay>
+
+        <!-- ส่วนหัว -->
         <h2 class="minimal-title mb-10">
           <v-icon color="pink lighten-2" size="36" class="mr-2">mdi-heart</v-icon>
-          ประวัติการศึกษา
+          {{ languageStore.currnetedLanguage === 'TH' ? 'ประวัติการศึกษา' : 'Education History' }}
         </h2>
+
+        <!-- ROW แสดงการศึกษา -->
         <v-row justify="center" align="stretch" class="education-row">
           <v-col
             cols="12"
             md="8"
             lg="6"
-            v-for="(item, index) in educationList"
+            v-for="(item, index) in localizedEducationList"
             :key="index"
             class="d-flex"
           >
@@ -82,9 +148,10 @@ const skills = [
                       <v-chip color="pink lighten-4" text-color="pink darken-2" class="mr-2" small>
                         {{ item.degree }}
                       </v-chip>
-                      <span v-if="item.major" class="ml-1 minimal-major"
-                        >สาขา: <strong>{{ item.major }}</strong></span
-                      >
+                      <span v-if="item.major" class="ml-1 minimal-major">
+                        {{ languageStore.currnetedLanguage === 'TH' ? 'สาขา : ' : 'Major : ' }}
+                        <strong>{{ item.major }}</strong>
+                      </span>
                     </div>
                     <div class="mb-2 d-flex align-center">
                       <v-icon left small color="blue lighten-2" class="mr-1">mdi-calendar</v-icon>
@@ -105,11 +172,13 @@ const skills = [
       <v-container class="my-12">
         <h2 class="minimal-title text-center mb-8">
           <v-icon color="blue lighten-2" size="32" class="mr-2">mdi-palette</v-icon>
-          ทักษะที่เชี่ยวชาญ
+          {{
+            languageStore.currnetedLanguage === 'TH' ? 'ทักษะและความสามารถ' : 'Skills and Abilities'
+          }}
         </h2>
         <v-row dense align="stretch">
           <v-col
-            v-for="(category, index) in skills"
+            v-for="(category, index) in localizedSkills"
             :key="index"
             cols="12"
             md="6"
@@ -146,24 +215,49 @@ const skills = [
           <div class="goal-icon-bg mr-3">
             <v-icon size="36" color="pink lighten-2">mdi-bullseye-arrow</v-icon>
           </div>
-          <h2 class="goal-title-minimal">เป้าหมายของฉัน</h2>
+          <h2 class="goal-title-minimal">
+            {{ languageStore.currnetedLanguage === 'TH' ? 'เป้าหมายของผม' : 'My Goal' }}
+          </h2>
         </div>
+
         <v-card class="goal-card-minimal modern-goal-card" flat>
           <v-card-text class="goal-text-minimal modern-goal-text">
-            <span class="goal-highlight">ผมมีความมุ่งมั่นที่จะทำงานในตำแหน่ง</span>
-            <strong>Backend Developer</strong> หรือ <strong>Frontend Developer</strong>
-            <br />
             <span class="goal-highlight">
-              เพราะผมสนใจทั้งด้านการพัฒนาโครงสร้างระบบและการออกแบบประสบการณ์ผู้ใช้ โดยเฉพาะในส่วนของ
+              {{
+                languageStore.currnetedLanguage === 'TH'
+                  ? 'ผมมีความมุ่งมั่นที่จะทำงานในตำแหน่ง'
+                  : 'I am determined to work as a'
+              }}
+            </span>
+            <strong>Backend Developer</strong>
+            {{ languageStore.currnetedLanguage === 'TH' ? ' หรือ ' : ' or ' }}
+            <strong>Frontend Developer</strong>
+            <br />
+
+            <span class="goal-highlight">
+              {{
+                languageStore.currnetedLanguage === 'TH'
+                  ? 'เพราะผมสนใจทั้งด้านการพัฒนาโครงสร้างระบบและการออกแบบประสบการณ์ผู้ใช้ โดยเฉพาะในส่วนของ'
+                  : 'I am passionate about both system architecture and user experience design, especially in the'
+              }}
               <strong>Backend</strong>
             </span>
+
             <span class="goal-highlight">
-              ผมมีความสนใจในกระบวนการเขียนโปรแกรมที่เกี่ยวข้องกับการออกแบบ API,
-              การเชื่อมต่อกับฐานข้อมูล และการสร้างระบบที่มีประสิทธิภาพและปลอดภัย
+              {{
+                languageStore.currnetedLanguage === 'TH'
+                  ? 'ผมมีความสนใจในกระบวนการเขียนโปรแกรมที่เกี่ยวข้องกับการออกแบบ API, การเชื่อมต่อกับฐานข้อมูล และการสร้างระบบที่มีประสิทธิภาพและปลอดภัย'
+                  : 'I’m particularly interested in programming processes involving API design, database connectivity, and building efficient and secure systems.'
+              }}
             </span>
             <br />
+
             <span class="goal-highlight">
-              ผมเชื่อว่าความเข้าใจในทั้งสองฝั่งจะช่วยให้ผมสามารถพัฒนาระบบที่ตอบโจทย์ผู้ใช้งานได้อย่างรอบด้าน
+              {{
+                languageStore.currnetedLanguage === 'TH'
+                  ? 'ผมเชื่อว่าความเข้าใจในทั้งสองฝั่งจะช่วยให้ผมสามารถพัฒนาระบบที่ตอบโจทย์ผู้ใช้งานได้อย่างรอบด้าน'
+                  : 'I believe that understanding both sides allows me to build well-rounded solutions that meet user needs.'
+              }}
             </span>
           </v-card-text>
         </v-card>
@@ -174,6 +268,32 @@ const skills = [
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+/* ปุ่ม Languages */
+.lang-btn-wrapper {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+}
+
+.lang-btn {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: #ffffffdd;
+  color: #333;
+  border-radius: 20px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-transform: none;
+  transition: background-color 0.2s ease;
+}
+
+.lang-btn:hover {
+  background-color: #f0e6ff;
+  color: #6a1b9a;
+}
 
 .modern-goal-section {
   background: linear-gradient(120deg, #e3f0ff 60%, #ffe3f6 100%);

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useCounterStore } from '@/stores/language'
+import { useLanguageStore } from '@/stores/language'
 import { ref } from 'vue'
-const languageStore = useCounterStore()
+const languageStore = useLanguageStore()
 
 const isLoading = ref(false)
 function switchLanguage() {
