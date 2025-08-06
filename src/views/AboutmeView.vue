@@ -91,7 +91,7 @@ const localizedSkills = computed(() => {
       <MenuViewVue />
     </v-app-bar>
     <v-main class="minimal-bg">
-      <v-container class="py-12">
+      <v-container fluid class="py-12">
         <!-- ROW แรก: ปุ่มเปลี่ยนภาษา อยู่ฝั่งขวาสุด -->
         <v-row>
           <v-col cols="12" class="d-flex justify-end">
@@ -120,9 +120,9 @@ const localizedSkills = computed(() => {
             lg="6"
             v-for="(item, index) in localizedEducationList"
             :key="index"
-            class="d-flex"
+            class="d-flex justify-center"
           >
-            <v-card class="minimal-card pa-6 ml-14" elevation="2" rounded="xl">
+            <v-card class="minimal-card pa-6 mx-auto" elevation="2" rounded="xl">
               <v-row align="center" no-gutters>
                 <v-col cols="12" md="4" class="d-flex justify-center align-center">
                   <div class="edu-avatar-wrapper">
