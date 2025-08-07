@@ -180,23 +180,27 @@ const openDialog = (project: any) => {
 
         <!-- Dialog -->
         <v-dialog v-model="dialog" max-width="1000px">
-          <v-card color="#121212" dark>
+          <v-card
+            color="#121212"
+            dark
+            style="max-height: 90vh; display: flex; flex-direction: column"
+          >
             <!-- รูป Carousel -->
-            <v-carousel height="400" hide-delimiter-background show-arrows>
+            <v-carousel height="300" hide-delimiter-background show-arrows>
               <v-carousel-item v-for="(img, idx) in selectedProject.images" :key="idx">
                 <v-img :src="img" contain height="100%" />
               </v-carousel-item>
             </v-carousel>
 
-            <!-- เนื้อหาที่ scroll ได้ -->
-            <v-card-text class="mt-4 text-subtitle-1 scrollable-text">
+            <!-- Scrollable content -->
+            <div style="overflow-y: auto; padding: 16px; max-height: 300px">
               <h3 class="font-weight-bold mb-2">
                 {{ selectedProject.title[currentLang] }}
               </h3>
               <p>
                 {{ selectedProject.description[currentLang] }}
               </p>
-            </v-card-text>
+            </div>
           </v-card>
         </v-dialog>
       </v-container>
