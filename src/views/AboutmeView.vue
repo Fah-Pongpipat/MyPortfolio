@@ -90,7 +90,7 @@ const localizedSkills = computed(() => {
     <v-app-bar app color="white" flat class="minimal-appbar">
       <MenuViewVue />
     </v-app-bar>
-    <v-main class="minimal-bg">
+    <v-main class="minimal-bg fade-in">
       <v-container fluid class="py-12">
         <!-- ROW แรก: ปุ่มเปลี่ยนภาษา อยู่ฝั่งขวาสุด -->
         <v-row>
@@ -210,7 +210,7 @@ const localizedSkills = computed(() => {
         </v-row>
       </v-container>
 
-      <v-container class="my-12 goal-section-minimal fade-in modern-goal-section">
+      <v-container class="my-12 goal-section-minimal modern-goal-section">
         <div class="goal-header d-flex align-center mb-6 justify-center">
           <div class="goal-icon-bg mr-3">
             <v-icon size="36" color="pink lighten-2">mdi-bullseye-arrow</v-icon>

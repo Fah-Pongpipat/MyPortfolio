@@ -144,6 +144,22 @@ function showIsLoading() {
 </template>
 
 <style scoped>
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* พื้นหลังแนวมินิมอล ฟ้าอ่อน ชมพูอ่อน ขาว */
 .minimal-bg {
   background: linear-gradient(135deg, #e3f0ff 0%, #ffe3f6 50%, #ffffff 100%);
