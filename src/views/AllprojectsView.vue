@@ -14,12 +14,11 @@ import MusicF2 from '../images/project/music-2.jpg'
 import MusicF3 from '../images/project/music-3.jpg'
 import MusicF4 from '../images/project/music-4.jpg'
 
-import ConverBMI from '../images/project/Conver-BMI.jpg'
-import BMI1 from '../images/project/BMI-1.jpg'
-import BMI2 from '../images/project/BMI-2.jpg'
-import BMI3 from '../images/project/BMI-3.jpg'
-import BMI4 from '../images/project/BMI-4.jpg'
-import BMI5 from '../images/project/BMI-5.jpg'
+import ConverWeather from '../images/project/Conver-weather.jpg'
+import WT1 from '../images/project/weath-1.jpg'
+import WT2 from '../images/project/weath-2.jpg'
+import WT3 from '../images/project/weath-3.jpg'
+import WT4 from '../images/project/weath-4.jpg'
 
 import ConverBuu from '../images/project/Conver-Buu.jpg'
 import Buu1 from '../images/project/Buu-1.jpg'
@@ -35,39 +34,87 @@ import Buu10 from '../images/project/Buu-10.jpg'
 import Buu11 from '../images/project/Buu-11.jpg'
 import Buu12 from '../images/project/Buu-12.jpg'
 import Buu13 from '../images/project/Buu-13.jpg'
+
+import { useLanguageStore } from '@/stores/language'
+
+const languageStore = useLanguageStore()
+const isLoading = ref(false)
+function switchLanguage() {
+  // สลับภาษาและบันทึกลง localStorage
+  languageStore.currnetedLanguage = languageStore.currnetedLanguage === 'TH' ? 'ENG' : 'TH'
+  localStorage.setItem('language', languageStore.currnetedLanguage)
+  showIsLoading()
+  // รีเฟรชหน้าเพื่อให้การเปลี่ยนแปลงมีผล
+}
+function showIsLoading() {
+  isLoading.value = true
+  setTimeout(() => {
+    isLoading.value = false
+  }, 500)
+}
 const projects = [
   {
-    title: 'ระบบจองหอสมุด (BUU Library)',
+    title: {
+      TH: 'ระบบจองหอสมุด (BUU Library)',
+      ENG: 'BUU Library Reservation System',
+    },
     cover: ConverBuu,
     images: [Buu1, Buu2, Buu3, Buu4, Buu5, Buu6, Buu7, Buu8, Buu9, Buu10, Buu11, Buu12, Buu13],
-    description:
-      'ระบบจองห้องหอสมุดที่พัฒนาระหว่างการฝึกงาน 4 เดือน ณ สำนักหอสมุด มหาวิทยาลัยบูรพา โดยระบบรองรับการจองห้องประชุมและห้องอ่านหนังสือ พร้อมฟีเจอร์เพิ่มเติม เช่น การเพิ่มวันหยุด การสั่งอาหารสำหรับห้องประชุม และการจัดการสิทธิ์ผู้ใช้ โดยผมรับผิดชอบพัฒนา Backend, เชื่อมต่อฐานข้อมูล, ออกแบบ API และ Deploy ขึ้นใช้งานจริงบนเซิร์ฟเวอร์ของหอสมุด',
+    description: {
+      TH: `ระบบจองห้องหอสมุดที่พัฒนาระหว่างการฝึกงาน 4 เดือน ณ สำนักหอสมุด มหาวิทยาลัยบูรพา โดยระบบรองรับการจองห้องประชุมและห้องอ่านหนังสือ พร้อมฟีเจอร์เพิ่มเติม เช่น การเพิ่มวันหยุด การสั่งอาหารสำหรับห้องประชุม และการจัดการสิทธิ์ผู้ใช้ โดยผมรับผิดชอบพัฒนา Backend, เชื่อมต่อฐานข้อมูล, ออกแบบ API และ Deploy ขึ้นใช้งานจริงบนเซิร์ฟเวอร์ของหอสมุด`,
+      ENG: `A library room reservation system developed during my 4-month internship at the Burapha University Library. The system supports booking meeting and reading rooms, with additional features like adding holidays, ordering food for meeting rooms, and managing user permissions. I was responsible for backend development, database integration, API design, and deployment to the library's server.`,
+    },
   },
   {
-    title: 'Classify Emotions',
+    title: {
+      TH: 'Classify Emotions',
+      ENG: 'Classify Emotions',
+    },
     cover: ConverEmotion,
     images: [Emotion1, Emotion2, Emotion3, Emotion4, Emotion5],
-    description: `โปรเจกต์นี้เป็นการพัฒนา AI สำหรับจำแนกอารมณ์ของมนุษย์จากภาพใบหน้า โดยสามารถแยกแยะได้ทั้งหมด 5 อารมณ์ ได้แก่ โกรธ เศร้า เฉยๆ มีความสุข และประหลาดใจ ถูกออกแบบขึ้นเพื่อประยุกต์ใช้งานในหลายด้าน เช่น การวิเคราะห์ความรู้สึกของลูกค้า (Sentiment Analysis), การติดตามสุขภาพจิต และการสร้างเกมที่ควบคุมด้วยใบหน้า
+    description: {
+      TH: `โปรเจกต์นี้เป็นการพัฒนา AI สำหรับจำแนกอารมณ์ของมนุษย์จากภาพใบหน้า โดยสามารถแยกแยะได้ทั้งหมด 5 อารมณ์ ได้แก่ โกรธ เศร้า เฉยๆ มีความสุข และประหลาดใจ ถูกออกแบบขึ้นเพื่อประยุกต์ใช้งานในหลายด้าน เช่น การวิเคราะห์ความรู้สึกของลูกค้า (Sentiment Analysis), การติดตามสุขภาพจิต และการสร้างเกมที่ควบคุมด้วยใบหน้า
 
 ระบบนี้พัฒนาโดยใช้ภาษา Python และไลบรารี Deep Learning อย่าง PyTorch, torchvision และ Pillow ด้านการประมวลผลข้อมูลใช้ NumPy และ Matplotlib ร่วมกับการพัฒนาใน VS Code ตัวโมเดลใช้โครงข่าย Convolutional Neural Network (CNN) พร้อมฟังก์ชัน Loss แบบ Categorical Cross-Entropy และ Optimizer แบบ Adam โดยใช้ Activation Function คือ Softmax เพื่อให้สามารถจำแนกอารมณ์ได้อย่างแม่นยำ
 
 โครงการนี้เป็นส่วนหนึ่งของวิชา Deep Learning แสดงให้เห็นถึงความเข้าใจทั้งเชิงทฤษฎีและการนำไปใช้งานจริงของโมเดล AI ในงานด้านการจดจำและวิเคราะห์อารมณ์มนุษย์`,
+      ENG: `This project is an AI that classifies human emotions from facial images. It can distinguish five emotions: angry, sad, neutral, happy, and surprised. It’s designed for various applications like customer sentiment analysis, mental health monitoring, and emotion-based gaming.
+
+Built using Python with Deep Learning libraries such as PyTorch, torchvision, and Pillow. Data processing utilized NumPy and Matplotlib. The model is based on a Convolutional Neural Network (CNN), using Categorical Cross-Entropy loss, Adam optimizer, and Softmax activation for accurate classification.
+
+This was developed for a Deep Learning course, demonstrating both theoretical understanding and practical application of AI in human emotion recognition.`,
+    },
   },
   {
-    title: 'ระบบฟังเพลง Spotifuu',
+    title: {
+      TH: 'ระบบฟังเพลง Spotifuu',
+      ENG: 'Spotifuu Music Streaming System',
+    },
     cover: ConverMusic,
     images: [MusicF1, MusicF2, MusicF3, MusicF4],
-    description: `Spotifuu เป็นเว็บไซต์ฟังเพลงออนไลน์ที่พัฒนาขึ้นในช่วงปีที่ 3 ของการเรียนมหาวิทยาลัย 
+    description: {
+      TH: `Spotifuu เป็นเว็บไซต์ฟังเพลงออนไลน์ที่พัฒนาขึ้นในช่วงปีที่ 3 ของการเรียนมหาวิทยาลัย 
 โดยมีฟีเจอร์หลักคือการเล่นเพลงจากรายการที่จัดไว้ล่วงหน้า พร้อมระบบแสดงรายชื่อเพลงและหน้าควบคุมการเล่นเพลงอย่างครบถ้วน 
 ในโปรเจกต์นี้ผมรับผิดชอบทั้งในส่วนของ Backend และ Frontend โดยมีหน้าที่ในการพัฒนา API สำหรับจัดการข้อมูลเพลงและผู้ใช้งาน 
 รวมถึงออกแบบหน้าเว็บให้สามารถใช้งานได้อย่างลื่นไหลและรองรับการเล่นเพลงแบบเรียลไทม์`,
+      ENG: `Spotifuu is an online music streaming platform developed during my third year of university. Its main features include playlist playback, a complete song list, and a real-time music control interface.
+
+I handled both backend and frontend development, built APIs for managing songs and user data, and designed a responsive web interface that delivers smooth, real-time music streaming.`,
+    },
   },
   {
-    title: 'โปรแกรมเช็คค่า BMI',
-    cover: ConverBMI,
-    images: [BMI1, BMI2, BMI3, BMI4, BMI5],
-    description:
-      'โปรเจกต์นี้เป็นเว็บแอปพลิเคชันสำหรับคำนวณค่า BMI (Body Mass Index) ซึ่งพัฒนาด้วย HTML, CSS และ JavaScript ในช่วงเริ่มต้นของการเรียนรู้การพัฒนาเว็บไซต์ ตัวระบบจะรับค่าน้ำหนักและส่วนสูงจากผู้ใช้งาน เพื่อนำไปคำนวณค่า BMI และแสดงผลลัพธ์พร้อมกับสถานะร่างกาย เช่น น้ำหนักน้อยเกินไป ปกติ หรืออ้วนเกินไป เป็นโปรเจกต์ที่ช่วยฝึกพื้นฐานด้านการออกแบบและการคำนวณเชิงตรรกะด้วย JavaScript',
+    title: {
+      TH: 'เว็บไซต์พยากรณ์อากาศ',
+      ENG: 'Weather Forecast Website',
+    },
+    cover: ConverWeather,
+    images: [WT1, WT2, WT3, WT4],
+    description: {
+      TH: `นี้คือโปรเจคต์ที่ผมพัฒนาขึ้นเพื่อทดสอบความรู้พื้นฐานที่ได้เรียนรู้เกี่ยว React,js + JavaScript เพือมาทำเว็บไซต์พยากรณ์อากาศ โดยใช้ API ของ OpenWeatherMap ในการดึงข้อมูลสภาพอากาศปัจจุบัน โดยมีฟีเจอร์หลักๆ ได้แก่ การค้นหาจังหวัดที่ผู้ใช้งานได้เลือก, แสดงสภาพอากาศปัจจุบัน และ ก็ยังแสดงข้อมูลเพิ่มเติมเช่น ความชื้น, ความเร็วลม และอื่นๆ`,
+      ENG: `This project was built to apply my basic knowledge of React.js and JavaScript. It’s a weather forecast website that uses the OpenWeatherMap API to fetch real-time weather data.
+
+Key features include city-based search, display of current weather, and additional info like humidity, wind speed, and more.`,
+    },
   },
 ]
 
@@ -90,9 +137,28 @@ const openDialog = (project: any) => {
 
     <!-- ✅ Project List -->
     <v-main class="minimal-bg py-12">
-      <v-container class="fade-in">
-        <h2 class="header-project-title">My Projects</h2>
+      <v-container fluid class="fade-in">
+        <!-- ปุ่มเปลี่ยนภาษา -->
+        <v-row>
+          <v-col cols="12" class="d-flex justify-end">
+            <v-btn class="lang-btn position-btn" @click="switchLanguage">
+              {{ languageStore.currnetedLanguage }}
+            </v-btn>
+          </v-col>
+        </v-row>
 
+        <!-- Loading -->
+        <v-overlay v-model="isLoading" class="d-flex align-center justify-center" absolute>
+          <v-progress-circular indeterminate size="64" color="pink" />
+        </v-overlay>
+
+        <!-- หัวข้อ "My Projects" -->
+        <h2 class="minimal-title mb-10">
+          <v-icon color="blue lighten-2" size="36" class="mr-2">mdi-folder-search-outline</v-icon>
+          {{ languageStore.currnetedLanguage === 'TH' ? 'โปรเจกต์ของฉัน' : 'My Projects' }}
+        </h2>
+
+        <!-- Cards -->
         <v-row dense class="project-grid" justify="center">
           <v-col
             v-for="(project, index) in projects"
@@ -102,24 +168,32 @@ const openDialog = (project: any) => {
             @click="openDialog(project)"
           >
             <v-card class="project-card" dark>
-              <v-img :src="project.cover" height="200px" cover></v-img>
-              <div class="project-title">{{ project.title }}</div>
+              <v-img :src="project.cover" height="200px" cover />
+              <div class="project-title">
+                {{ project.title[languageStore.currnetedLanguage] }}
+              </div>
             </v-card>
           </v-col>
         </v-row>
 
-        <!-- ✅ Dialog with Carousel -->
+        <!-- Dialog -->
         <v-dialog v-model="dialog" max-width="1000px">
           <v-card color="#121212" dark>
+            <!-- รูป Carousel -->
             <v-carousel height="400" hide-delimiter-background show-arrows>
               <v-carousel-item v-for="(img, idx) in selectedProject.images" :key="idx">
-                <v-img :src="img" contain height="100%"></v-img>
+                <v-img :src="img" contain height="100%" />
               </v-carousel-item>
             </v-carousel>
 
-            <v-card-text class="mt-4 text-subtitle-1">
-              <h3 class="font-weight-bold mb-2">{{ selectedProject.title }}</h3>
-              <p>{{ selectedProject.description }}</p>
+            <!-- เนื้อหาที่ scroll ได้ -->
+            <v-card-text class="mt-4 text-subtitle-1 scrollable-text">
+              <h3 class="font-weight-bold mb-2">
+                {{ selectedProject.title[languageStore.currnetedLanguage] }}
+              </h3>
+              <p>
+                {{ selectedProject.description[languageStore.currnetedLanguage] }}
+              </p>
             </v-card-text>
           </v-card>
         </v-dialog>
@@ -129,6 +203,57 @@ const openDialog = (project: any) => {
 </template>
 
 <style scoped>
+.scrollable-text::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollable-text::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+.scrollable-text::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+.minimal-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #e97ae9;
+  letter-spacing: 1px;
+  font-family: 'Quicksand', 'Prompt', 'Sarabun', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ปุ่ม Languages */
+.lang-btn-wrapper {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+}
+
+.lang-btn {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: #ffffffdd;
+  color: #333;
+  border-radius: 20px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-transform: none;
+  transition: background-color 0.2s ease;
+}
+
+.lang-btn:hover {
+  background-color: #f0e6ff;
+  color: #6a1b9a;
+}
+.position-btn {
+  top: 15px;
+  right: 24px;
+}
 /* พื้นหลังแนวมินิมอล ฟ้าอ่อน ชมพูอ่อน ขาว */
 .minimal-bg {
   background: linear-gradient(135deg, #e3f0ff 0%, #ffe3f6 50%, #ffffff 100%);
