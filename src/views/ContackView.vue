@@ -1,55 +1,128 @@
 <script setup lang="ts">
 import MenuViewVue from './MenuView.vue'
+import { useLanguageStore } from '@/stores/language'
+import { ref } from 'vue'
+const languageStore = useLanguageStore()
+
+const isLoading = ref(false)
+function switchLanguage() {
+  // สลับภาษาและบันทึกลง localStorage
+  languageStore.currnetedLanguage = languageStore.currnetedLanguage === 'TH' ? 'ENG' : 'TH'
+  localStorage.setItem('language', languageStore.currnetedLanguage)
+  showIsLoading()
+  // รีเฟรชหน้าเพื่อให้การเปลี่ยนแปลงมีผล
+}
+function showIsLoading() {
+  isLoading.value = true
+  setTimeout(() => {
+    isLoading.value = false
+  }, 500)
+}
 </script>
 
 <template>
   <v-app>
+    <!-- Top Bar -->
     <v-app-bar app color="black" dark flat>
       <MenuViewVue />
     </v-app-bar>
 
-    <v-main class="bg-contact">
+    <!-- Main Content -->
+    <v-main class="minimal-bg">
       <v-container class="contact-wrapper py-16 fade-in text-center">
-        <!-- Header -->
-        <h2 class="gradient-title mb-4">ยินดีที่ได้รู้จักครับ</h2>
+        <!-- Language Switch Button -->
+        <div class="d-flex justify-end mb-4">
+          <v-btn class="lang-btn" @click="switchLanguage">
+            {{ languageStore.currnetedLanguage }}
+          </v-btn>
+        </div>
+
+        <!-- Loading Overlay -->
+        <v-overlay v-model="isLoading" class="d-flex align-center justify-center" absolute>
+          <v-progress-circular indeterminate size="64" color="pink" />
+        </v-overlay>
+
+        <!-- Heading -->
+        <h2 class="gradient-title mb-4">
+          {{
+            languageStore.currnetedLanguage === 'TH'
+              ? 'ยินดีที่ได้รู้จักครับผม'
+              : 'Nice to meet you!'
+          }}
+        </h2>
         <p class="contact-intro">
-          หากคุณกำลังมองหาคนร่วมทีมที่มีความรับผิดชอบ
-          <span class="highlight">พร้อมเรียนรู้</span> และใส่ใจในรายละเอียด<br />
-          ผมยินดีอย่างยิ่งที่จะร่วม
-          <span class="highlight">ทำงาน</span> และเติบโตไปพร้อมกับทีมของคุณ 🙏<br />
-          สามารถ <span class="highlight">ติดต่อ</span> ผมได้ผ่านช่องทางด้านล่างครับ
+          {{
+            languageStore.currnetedLanguage === 'TH'
+              ? 'หากคุณกำลังมองหาคนร่วมทีมที่มีความรับผิดชอบ'
+              : "If you're looking for a team member who is responsible"
+          }}
+          <span class="highlight">
+            {{ languageStore.currnetedLanguage === 'TH' ? 'พร้อมที่จะเรียนรู้' : 'eager to learn' }}
+          </span>
+          {{
+            languageStore.currnetedLanguage === 'TH'
+              ? 'และใส่ใจในรายละเอียด'
+              : 'and pays attention to detail.'
+          }}<br />
+          {{
+            languageStore.currnetedLanguage === 'TH'
+              ? 'ผมยินดีอย่างยิ่งที่จะร่วม'
+              : "I'd be more than happy to"
+          }}
+          <span class="highlight">
+            {{ languageStore.currnetedLanguage === 'TH' ? 'ทำงาน' : 'join the team' }}
+          </span>
+          {{
+            languageStore.currnetedLanguage === 'TH'
+              ? 'และเติบโตไปพร้อมกับทีมของคุณ 🙏'
+              : 'and grow together with your team. 🙏'
+          }}<br />
+          {{ languageStore.currnetedLanguage === 'TH' ? 'สามารถ' : 'Feel free to' }}
+          <span class="highlight">
+            {{ languageStore.currnetedLanguage === 'TH' ? 'ติดต่อ' : 'reach out to' }}
+          </span>
+          {{
+            languageStore.currnetedLanguage === 'TH'
+              ? 'ผมได้ผ่านช่องทางด้านล่างครับ'
+              : 'me through the contact info below.'
+          }}
         </p>
 
-        <!-- Card -->
-        <v-card class="contact-card mx-auto" max-width="600" elevation="12">
+        <!-- Contact Card -->
+        <v-card class="contact-card mx-auto elevation-12">
           <div class="text-center mb-6">
-            <h3 class="text-h5 font-weight-bold mb-1">Pongpipat Siangsai</h3>
+            <h3 class="text-h5 font-weight-bold mb-1">
+              {{
+                languageStore.currnetedLanguage === 'TH'
+                  ? 'ช่องทางการติดต่อ'
+                  : 'Contact Information'
+              }}
+            </h3>
           </div>
 
           <!-- Contact Info -->
           <v-row class="mb-6" dense justify="start">
-            <!-- Email -->
             <v-col cols="12" class="d-flex align-center mb-4 text-left">
               <img src="../images/email.png" alt="Email" class="icon mr-3" />
               <div>
                 <div class="text-caption text-grey-lighten-1">Email</div>
-                <div class="text-body-1 font-weight-medium text-white">
-                  pongpipat.workchat@hotmail.com
-                </div>
+                <div class="text-body-1 font-weight-medium">pongpipat.workchat@hotmail.com</div>
               </div>
             </v-col>
 
-            <!-- Phone -->
             <v-col cols="12" class="d-flex align-center mb-2 text-left">
               <img src="../images/telephone.png" alt="Phone" class="icon mr-3" />
               <div>
                 <div class="text-caption text-grey-lighten-1">Phone</div>
-                <div class="text-body-1 font-weight-medium text-white">098-993-5941</div>
+                <div class="text-body-1 font-weight-medium">
+                  098-993-5941
+                  {{ languageStore.currnetedLanguage === 'TH' ? 'หรือ' : 'or' }} 066-132-0025
+                </div>
               </div>
             </v-col>
           </v-row>
 
-          <!-- Social Icons -->
+          <!-- Social Media Links -->
           <div class="social-links mt-6 d-flex justify-center flex-wrap">
             <a href="https://web.facebook.com/pongpipat.saingsat/" target="_blank">
               <img src="../images/facebook.png" alt="Facebook" />
@@ -71,119 +144,115 @@ import MenuViewVue from './MenuView.vue'
 </template>
 
 <style scoped>
-.highlight {
-  color: #aaf3b4;
+/* พื้นหลังแนวมินิมอล ฟ้าอ่อน ชมพูอ่อน ขาว */
+.minimal-bg {
+  background: linear-gradient(135deg, #e3f0ff 0%, #ffe3f6 50%, #ffffff 100%);
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* วงกลมตกแต่งพื้นหลัง */
+.minimal-bg::before,
+.minimal-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.minimal-bg::before {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #b3e5fc 60%, #e3f0ff 100%);
+  top: -120px;
+  left: -120px;
+}
+.minimal-bg::after {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, #f8bbd0 60%, #ffe3f6 100%);
+  bottom: -100px;
+  right: -100px;
+}
+
+.lang-btn {
+  font-family: 'Kanit', sans-serif;
   font-weight: 600;
+  font-size: 14px;
+  background-color: #ffffffdd;
+  color: #333;
+  border-radius: 20px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-transform: none;
+  transition: background-color 0.2s ease;
 }
 
-.contact-intro {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #e0e0e0;
-  text-shadow:
-    0 0 4px rgba(0, 255, 255, 0.2),
-    0 0 8px rgba(160, 32, 240, 0.2);
-  font-weight: 500;
-  margin-bottom: 48px;
-  letter-spacing: 0.3px;
-  transition: color 0.3s ease;
-}
-
-.contact-wrapper {
-  max-width: 960px;
-  margin: 0 auto;
+.lang-btn:hover {
+  background-color: #f0e6ff;
+  color: #6a1b9a;
 }
 
 .gradient-title {
-  font-size: 32px;
-  font-weight: 800;
-  background: linear-gradient(90deg, #00fff0, #a020f0);
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #7c4dff, #9c27b0); /* ปรับเป็นม่วง gradient */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.contact-card {
-  background: rgba(20, 20, 20, 0.95);
-  color: #fff;
-  border-radius: 20px;
-  padding: 32px;
-  position: relative;
-  box-shadow:
-    0 0 16px rgba(0, 255, 255, 0.2),
-    0 0 24px rgba(160, 32, 240, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.contact-intro {
+  color: #555555; /* สีเทาเข้มสุภาพ อ่านง่ายกว่า #ccc */
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
-.contact-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  border-radius: 20px;
-  background: radial-gradient(circle, rgba(0, 255, 255, 0.4), transparent 70%);
-  filter: blur(30px);
-  z-index: -1;
-}
-.bg-contact {
-  background-color: #000;
-}
-
-.contact-wrapper {
-  max-width: 960px;
-  margin: 0 auto;
+.highlight {
+  color: #9c27b0; /* ชมพูอมม่วงสุภาพ */
+  font-weight: bold;
 }
 
 .contact-card {
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  padding: 32px;
-  color: #fff;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-  transition: 0.3s ease;
+  background-color: #2c2c2c;
+  color: #e0e0e0; /* สีเทาอ่อน ดูนุ่มนวลกว่า pure white */
+  padding: 2rem;
+  border-radius: 16px;
 }
 
-.contact-card:hover {
-  box-shadow:
-    0 0 40px rgba(0, 255, 255, 0.3),
-    0 0 30px #a020f0;
+.contact-card h3 {
+  color: #ffffff; /* ชื่อให้เด่นสุด */
 }
 
 .icon {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
 }
 
 .social-links img {
   width: 36px;
   height: 36px;
-  margin: 10px 14px;
-  filter: grayscale(100%);
-  transition:
-    transform 0.3s ease,
-    filter 0.3s ease;
+  margin: 0 10px;
+  filter: brightness(1.2);
+  transition: transform 0.2s;
 }
 
 .social-links img:hover {
-  transform: scale(1.2);
-  filter: none;
+  transform: scale(1.1);
+  filter: brightness(1.5);
 }
 
-.fade-in {
-  animation: fadeIn 1s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* เนื้อหาทั้งหมดข้างใน */
+.slide-down-wrapper {
+  animation: slideDown 1s ease-out;
+  width: 100%;
+  max-width: 700px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 3;
 }
 </style>

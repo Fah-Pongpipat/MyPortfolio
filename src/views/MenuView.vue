@@ -34,52 +34,70 @@
 </template>
 
 <style scoped>
-/* ✅ Container สำหรับแถบเมนู */
+/* ===== 💼 Navbar Container ===== */
 .menu-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
   overflow: hidden;
-  padding: 0 8px;
+  padding: 0 12px;
 }
 
-/* ✅ Wrapper ครอบเมนู (บังคับความกว้าง และ scroll แนวนอนถ้าจอแคบ) */
+/* ===== 🧭 Menu Wrapper (scrollable if needed) ===== */
 .menu-wrapper {
   flex-grow: 1;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+.menu-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
-/* ✅ Scroll เมนู */
+/* ===== 🧨 Menu Items (v-btn) ===== */
 .menu-scroll {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: clamp(8px, 2vw, 16px);
   white-space: nowrap;
 }
 
-/* ✅ ปุ่มเมนู */
 .menu-scroll .v-btn {
-  font-weight: bold;
-  color: white;
-  font-size: clamp(13px, 2.5vw, 16px);
-  padding: 6px 10px;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: clamp(13px, 2vw, 16px);
+  padding: clamp(6px, 1.5vh, 10px) clamp(10px, 2vw, 16px);
   text-transform: none;
   flex-shrink: 0;
+  transition: color 0.2s ease;
 }
 
 .menu-scroll .v-btn:hover {
   color: #ff66cc;
 }
 
+/* ===== 🎯 Icons in Menu ===== */
 .menu-scroll .v-icon {
-  font-size: 18px;
-  margin-right: 4px;
+  font-size: clamp(16px, 2.2vw, 20px);
+  margin-right: 6px;
 }
 
-/* ✅ ชื่อโลโก้ */
+/* ===== 🖋️ Logo Title ===== */
 .v-toolbar-title {
-  font-size: clamp(16px, 4vw, 22px);
+  font-size: clamp(18px, 4vw, 26px);
+  font-weight: bold;
+  color: #ffffff;
   white-space: nowrap;
+  transition: font-size 0.3s ease;
+}
+
+/* ===== 📱 Responsive Breakpoints (optional) ===== */
+@media (max-width: 600px) {
+  .v-toolbar-title {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 </style>
