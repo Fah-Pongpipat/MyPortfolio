@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MenuViewVue from './MenuView.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ConverEmotion from '../images/project/Conver emotion.jpg'
 import Emotion1 from '../images/project/emotion-1.jpg'
 import Emotion2 from '../images/project/emotion-2.jpg'
@@ -38,6 +38,8 @@ import Buu13 from '../images/project/Buu-13.jpg'
 import { useLanguageStore } from '@/stores/language'
 
 const languageStore = useLanguageStore()
+const currentLang = computed(() => languageStore.currnetedLanguage as 'TH' | 'ENG')
+
 const isLoading = ref(false)
 function switchLanguage() {
   // สลับภาษาและบันทึกลง localStorage
@@ -170,7 +172,7 @@ const openDialog = (project: any) => {
             <v-card class="project-card" dark>
               <v-img :src="project.cover" height="200px" cover />
               <div class="project-title">
-                {{ project.title[languageStore.currnetedLanguage] }}
+                {{ project.title[currentLang] }}
               </div>
             </v-card>
           </v-col>
@@ -189,10 +191,10 @@ const openDialog = (project: any) => {
             <!-- เนื้อหาที่ scroll ได้ -->
             <v-card-text class="mt-4 text-subtitle-1 scrollable-text">
               <h3 class="font-weight-bold mb-2">
-                {{ selectedProject.title[languageStore.currnetedLanguage] }}
+                {{ selectedProject.title[currentLang] }}
               </h3>
               <p>
-                {{ selectedProject.description[languageStore.currnetedLanguage] }}
+                {{ selectedProject.description[currentLang] }}
               </p>
             </v-card-text>
           </v-card>
