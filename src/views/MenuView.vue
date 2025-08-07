@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useLanguageStore } from '@/stores/language'
+
+const languageStore = useLanguageStore()
+</script>
 
 <template>
   <v-app>
@@ -11,16 +15,20 @@
         <div class="menu-wrapper">
           <div class="menu-scroll">
             <v-btn text @click="$router.push('/about-me')">
-              <v-icon left>mdi-account</v-icon> ABOUT ME
+              <v-icon left>mdi-account</v-icon>
+              {{ languageStore.currnetedLanguage === 'TH' ? 'เกี่ยวกับฉัน' : 'ABOUT ME' }}
             </v-btn>
             <v-btn text @click="$router.push('/all-project')">
-              <v-icon left>mdi-briefcase-variant</v-icon> PROJECTS
+              <v-icon left>mdi-briefcase-variant</v-icon>
+              {{ languageStore.currnetedLanguage === 'TH' ? 'ผลงาน' : 'PROJECTS' }}
             </v-btn>
             <v-btn text @click="$router.push('/certificates')">
-              <v-icon left>mdi-certificate</v-icon> CERTIFICATES
+              <v-icon left>mdi-certificate</v-icon>
+              {{ languageStore.currnetedLanguage === 'TH' ? 'ใบรับรอง' : 'CERTIFICATES' }}
             </v-btn>
             <v-btn text @click="$router.push('/contact')">
-              <v-icon left>mdi-email</v-icon> CONTACT
+              <v-icon left>mdi-email</v-icon>
+              {{ languageStore.currnetedLanguage === 'TH' ? 'ติดต่อ' : 'CONTACT' }}
             </v-btn>
           </div>
         </div>
